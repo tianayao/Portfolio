@@ -1,0 +1,101 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  border-radius: 999px;
+  padding: .75rem 1.15rem;
+  font-weight: 600;
+  transition: transform .2s ease, box-shadow .25s ease;
+}
+.btn-primary {
+  background: linear-gradient(120deg, var(--blue-start), var(--blue-end));
+  color: #fff;
+}
+.btn-secondary {
+  border: 1px solid rgba(58, 44, 39, .22);
+  background: rgba(255, 255, 255, .7);
+}
+.btn:hover { transform: translateY(-2px) scale(1.02); }
+
+.cta-group { display: flex; gap: .7rem; flex-wrap: wrap; }
+
+.pill,
+.tab {
+  background: rgba(255,255,255,.7);
+  border: 1px solid rgba(58, 44, 39, .2);
+  color: var(--brown);
+  border-radius: 999px;
+  padding: .45rem .9rem;
+}
+.pill.is-active,
+.tab.is-active { background: var(--sage); }
+.filter-group { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+.project-card {
+  background: var(--card);
+  border: 1px solid rgba(58,44,39,.12);
+  border-radius: 20px;
+  padding: .95rem;
+  box-shadow: 0 6px 16px rgba(58,44,39,.07);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.project-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 24px rgba(58,44,39,.15);
+}
+.project-thumb {
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  display: grid;
+  place-content: center;
+  background: linear-gradient(145deg, rgba(212,224,208,.7), rgba(167,199,231,.75));
+  margin-bottom: .75rem;
+}
+.project-links { display: flex; gap: .9rem; color: var(--terracotta); font-weight: 600; }
+
+.about-side,
+.fun-facts {
+  display: grid;
+  gap: .85rem;
+}
+.fun-facts p {
+  margin: 0;
+  padding: .8rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(58,44,39,.1);
+}
+
+.cursor,
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 60;
+}
+.cursor {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #6b4f3c;
+  background: transparent;
+  transform: translate(-50%, -50%);
+}
+.cursor.cursor-hover {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(120deg, var(--blue-start), var(--sage));
+  border: none;
+}
+.cursor-trail {
+  width: 6px;
+  height: 6px;
+  background: rgba(122, 165, 185, .6);
+  transform: translate(-50%, -50%);
+}
+
+@media (hover: none) {
+  body { cursor: auto; }
+  .cursor, .cursor-trail { display: none; }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal portfolio blending UX, front-end, and data storytelling." />
+  <meta property="og:title" content="Portfolio | Creative Warm-Tech" />
+  <meta property="og:description" content="A warm-tech portfolio with projects, about, and CV." />
+  <title>Portfolio | Creative Warm-Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+  <canvas id="ballet-bg" aria-hidden="true"></canvas>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="logo" href="#home">Ming.</a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#cv" class="nav-link">CV</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <aside class="progress-forest" aria-hidden="true">
+    <div class="vine"></div>
+    <span class="leaf leaf-1"></span>
+    <span class="leaf leaf-2"></span>
+    <span class="leaf leaf-3"></span>
+    <span class="leaf leaf-4"></span>
+  </aside>
+
+  <main>
+    <section id="home" class="section hero section-reveal">
+      <div class="hero-content">
+        <h1>Hi, I'm Ming</h1>
+        <p class="role"><span id="typedRole">UX Designer</span></p>
+        <p class="intro">I blend empathy, interface craft, and data to create meaningful digital experiences.</p>
+        <div class="cta-group">
+          <a href="#projects" class="btn btn-primary magnetic">View Projects</a>
+          <a href="#cv" class="btn btn-secondary magnetic">Download CV</a>
+        </div>
+      </div>
+      <div class="hero-photo" aria-label="Portrait placeholder">
+        <span>Photo</span>
+      </div>
+    </section>
+
+    <section id="projects" class="section section-reveal">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <div class="filter-group">
+          <button class="pill magnetic is-active">All</button>
+          <button class="pill magnetic">UX Research</button>
+          <button class="pill magnetic">Front-end</button>
+          <button class="pill magnetic">AI/Data</button>
+        </div>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-thumb">Project Preview</div>
+          <h3>City Mobility Insight</h3>
+          <p>React · D3 · Python</p>
+          <p>Interactive journey data dashboard for urban decision-making.</p>
+          <div class="project-links"><a href="#">Live</a><a href="#">GitHub</a></div>
+        </article>
+        <article class="project-card">
+          <div class="project-thumb">Project Preview</div>
+          <h3>Human-Centered Health App</h3>
+          <p>Figma · JS · Firebase</p>
+          <p>Research-led prototype improving adherence through micro-interactions.</p>
+          <div class="project-links"><a href="#">Live</a><a href="#">GitHub</a></div>
+        </article>
+        <article class="project-card">
+          <div class="project-thumb">Project Preview</div>
+          <h3>Climate Storytelling Map</h3>
+          <p>Mapbox · Vanilla JS</p>
+          <p>Layered narrative map to communicate regional impact patterns.</p>
+          <div class="project-links"><a href="#">Live</a><a href="#">GitHub</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="section about section-reveal">
+      <div class="about-story">
+        <h2>About Me</h2>
+        <p>I began in Interactive Media and evolved into Design Informatics to bridge design, behavior, and systems thinking.</p>
+        <p>I enjoy turning ambiguity into elegant interfaces rooted in research and measurable outcomes.</p>
+        <div class="skill-bars">
+          <div class="skill"><span>UX Research</span><div><i style="width: 90%"></i></div></div>
+          <div class="skill"><span>Front-end</span><div><i style="width: 82%"></i></div></div>
+          <div class="skill"><span>Data Analysis</span><div><i style="width: 76%"></i></div></div>
+        </div>
+      </div>
+      <aside class="about-side">
+        <div class="photo-frame">Photo</div>
+        <div class="fun-facts">
+          <p>🌱 I turn data into stories.</p>
+          <p>🍨 I analyzed 10k+ ice cream flavors.</p>
+          <p>🌍 I work across culture + code.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="cv" class="section section-reveal">
+      <h2>Curriculum Vitae</h2>
+      <div class="cv-tabs">
+        <button class="tab is-active" data-tab="online">View Online</button>
+        <button class="tab" data-tab="pdf">Download PDF</button>
+      </div>
+      <div class="cv-panel" id="onlinePanel">
+        <h3>Experience</h3>
+        <p>UX / Front-end Designer — Portfolio Studio (2023–Present)</p>
+        <h3>Education</h3>
+        <p>MA Design Informatics · BSc Interactive Media</p>
+      </div>
+      <div class="cv-panel hidden" id="pdfPanel">
+        <p>Use the button below to download a PDF copy.</p>
+        <a class="btn btn-primary magnetic" href="cv/your-cv.pdf" download>Download CV</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Ming. Built with warm-tech energy.</p>
+    <div class="socials">
+      <a href="#" aria-label="GitHub">GitHub</a>
+      <a href="#" aria-label="LinkedIn">LinkedIn</a>
+      <a href="mailto:hello@example.com" aria-label="Email">Email</a>
+    </div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

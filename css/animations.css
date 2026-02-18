@@ -1,0 +1,22 @@
+.section-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.section-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes growBar {
+  from { width: 0; }
+}
+
+@keyframes gentleFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.hero-photo,
+.photo-frame {
+  animation: gentleFloat 4.5s ease-in-out infinite;
+}
