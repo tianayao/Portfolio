@@ -73,9 +73,6 @@
   .storybook-page-button:first-child { grid-area: previous; }
   .storybook-page-button:last-child { grid-area: next; }
   .storybook-diamonds { grid-area: diamonds; }
-  .storybook-pills { position: relative; z-index: 2; justify-content: flex-start; }
-  .storybook-pill { flex: 1 1 8.5rem; }
-
   .site-footer { grid-template-columns: 1fr; text-align: center; }
   .site-footer p:first-child, .site-footer p:last-child { justify-self: center; }
 }

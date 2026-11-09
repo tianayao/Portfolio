@@ -1,11 +1,11 @@
 // Composition root: later controllers attach to the semantic mounts in index.html.
 // The HTML remains readable before JavaScript enhancement.
-import { projects, profile, contact } from './content.js';
+import { projects, profile, contact } from './content.js?v=2';
 import { createStoryState } from './state.js';
 import { createThemeController } from './theme.js';
 import { initNavigation, initOcean } from './ocean.js';
-import { renderProjectCards } from './cards.js?v=2';
-import { createStorybook } from './storybook.js?v=2';
+import { renderProjectCards } from './cards.js?v=3';
+import { createStorybook } from './storybook.js?v=3';
 import { renderAbout, renderContact, initDiscoveries, initBackToSurface, syncPointerMode } from './sections.js?v=3';
 
 export const storyState = createStoryState(projects);

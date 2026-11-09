@@ -50,14 +50,6 @@ function buildReader(dialog) {
   topControls.append(themes, close);
   top.append(brand, topControls);
 
-  const heading = node(doc, 'div', 'storybook-heading');
-  const eyebrow = node(doc, 'p', 'storybook-project-type');
-  eyebrow.dataset.storyProjectType = '';
-  const title = node(doc, 'h2', 'storybook-project-title');
-  title.dataset.storyTitle = '';
-  title.id = `${dialog.id || 'storybook'}-title`;
-  heading.append(eyebrow, title);
-
   const bookWrap = node(doc, 'div', 'storybook-book-wrap');
   const book = node(doc, 'div', 'storybook-book');
   book.dataset.storyBook = '';
@@ -116,18 +108,14 @@ function buildReader(dialog) {
   chapterNext.append(node(doc, 'span', '', 'Next'), node(doc, 'span', '', '→'), bubbles(doc));
   navigation.append(chapterPrevious, diamonds, chapterNext);
 
-  const pills = node(doc, 'nav', 'storybook-pills');
-  pills.setAttribute('aria-label', 'Story chapters');
   const helper = node(doc, 'p', 'storybook-helper', 'Use gallery arrows for images · use the controls below to turn chapters');
 
-  shell.append(top, heading, bookWrap, navigation, pills, helper);
+  shell.append(top, bookWrap, navigation, helper);
   dialog.replaceChildren(shell);
   return {
     shell,
     close,
     themes,
-    title,
-    eyebrow,
     book,
     gallery,
     media,
@@ -143,7 +131,6 @@ function buildReader(dialog) {
     chapterPrevious,
     chapterNext,
     diamonds,
-    pills,
   };
 }
 
@@ -178,8 +165,8 @@ export function createStorybook({
   dialog.classList.add('storybook-dialog');
   dialog.setAttribute('role', 'dialog');
   dialog.setAttribute('aria-modal', 'true');
-  dialog.setAttribute('aria-labelledby', ui.title.id);
-  dialog.removeAttribute('aria-label');
+  dialog.removeAttribute('aria-labelledby');
+  dialog.setAttribute('aria-label', 'Project storybook');
 
   function schedule(run, delay) {
     let timer;
@@ -219,7 +206,6 @@ export function createStorybook({
 
   function renderChapterNavigation(project) {
     ui.diamonds.replaceChildren();
-    ui.pills.replaceChildren();
     const chapters = Array.isArray(project?.chapters) ? project.chapters : [];
     chapters.forEach((chapter, index) => {
       const diamond = button(doc, 'storybook-diamond', `Go to ${chapter.label} chapter`);
@@ -227,12 +213,6 @@ export function createStorybook({
       diamond.dataset.chapterIndex = String(index);
       diamond.append(node(doc, 'span', '', '◆'));
       ui.diamonds.append(diamond);
-
-      const pill = button(doc, 'storybook-pill', `Go to ${chapter.label} chapter`);
-      pill.dataset.storyPill = '';
-      pill.dataset.chapterIndex = String(index);
-      pill.textContent = `${padded(index)} ${chapter.label}`;
-      ui.pills.append(pill);
     });
   }
 
@@ -285,7 +265,7 @@ export function createStorybook({
     const current = state.state.chapterIndex;
     ui.chapterPrevious.disabled = locked || current <= 0;
     ui.chapterNext.disabled = locked || !chapters.length || current >= chapters.length - 1;
-    for (const control of dialog.querySelectorAll('[data-story-diamond], [data-story-pill]')) {
+    for (const control of dialog.querySelectorAll('[data-story-diamond]')) {
       const selected = Number(control.dataset.chapterIndex) === current;
       if (selected) control.setAttribute('aria-current', 'step');
       else control.removeAttribute('aria-current');
@@ -300,8 +280,7 @@ export function createStorybook({
     const project = activeProject();
     const chapter = activeChapter();
     if (!project || !chapter) return;
-    ui.eyebrow.textContent = project.type || 'Illustrative case study';
-    ui.title.textContent = project.title || 'Project story';
+    dialog.setAttribute('aria-label', `${project.title || 'Project'} storybook`);
     ui.chapterTag.textContent = `${padded(state.state.chapterIndex)} / ${chapter.label || 'Chapter'}`;
     ui.chapterTitle.textContent = chapter.title || chapter.label || 'Untitled chapter';
     ui.narrative.textContent = chapter.narrative || 'Chapter copy awaiting replacement.';
@@ -434,7 +413,7 @@ export function createStorybook({
     else if (target.matches('[data-gallery-next]')) moveImage(1);
     else if (target.matches('[data-chapter-prev]')) setChapter(state.state.chapterIndex - 1, 'reverse');
     else if (target.matches('[data-chapter-next]')) setChapter(state.state.chapterIndex + 1, 'forward');
-    else if (target.matches('[data-story-diamond], [data-story-pill]')) {
+    else if (target.matches('[data-story-diamond]')) {
       const next = Number(target.dataset.chapterIndex);
       setChapter(next, next < state.state.chapterIndex ? 'reverse' : 'forward');
     } else if (target.matches('[data-story-theme]')) {

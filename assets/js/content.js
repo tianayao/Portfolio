@@ -74,6 +74,21 @@ export const projects = samples.map(sample => ({
   illustrative: true,
   cardShape: sample.cardShape,
   accent: sample.accent,
-  coverMedia: { src: null, alt: `Illustrative ${sample.title} cover awaiting replacement`, caption: 'Illustrative placeholder · replace with your own project cover.' },
+  characterMedia: {
+    src: {
+      'tide-notes': 'assets/images/work-tide-notes-porcupinefish.png',
+      'little-paths': 'assets/images/work-little-paths-tuna.png',
+      'shell-library': 'assets/images/work-shell-library-hermit-crab.png',
+      'blue-hour': 'assets/images/work-blue-hour-whale.png',
+      'slow-table': 'assets/images/work-slow-table-turtle.png',
+      'drift-space': 'assets/images/work-drift-space-seal.png',
+    }[sample.slug],
+    alt: `Watercolor ocean character for ${sample.title}`,
+  },
+  coverMedia: {
+    src: null,
+    alt: `Illustrative ${sample.title} project cover awaiting replacement`,
+    caption: 'Illustrative placeholder · replace with your own project cover.',
+  },
   chapters: chaptersFor(sample),
 }));

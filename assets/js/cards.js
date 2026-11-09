@@ -82,6 +82,7 @@ function buildMedia(doc, project) {
     image.alt = project.coverMedia.alt || '';
     image.loading = 'lazy';
     image.decoding = 'async';
+    media.classList.add('has-cover-art');
     media.append(image);
   } else {
     const placeholder = element(doc, 'span', 'project-cover-placeholder');
@@ -130,7 +131,16 @@ export function renderProjectCards(container, projects, onOpen = () => {}) {
     const silhouette = element(doc, 'div', 'project-card-silhouette');
     silhouette.dataset.cardSilhouette = '';
     silhouette.setAttribute('aria-hidden', 'true');
-    silhouette.innerHTML = getShapeTemplate(shape);
+    if (project.characterMedia?.src) {
+      const character = element(doc, 'img', 'project-card-character-art');
+      character.src = project.characterMedia.src;
+      character.alt = '';
+      character.loading = 'lazy';
+      character.decoding = 'async';
+      silhouette.append(character);
+    } else {
+      silhouette.innerHTML = getShapeTemplate(shape);
+    }
     visual.append(number, silhouette, buildMedia(doc, project));
 
     const bubbles = element(doc, 'span', 'project-card-bubbles');

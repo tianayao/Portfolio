@@ -136,15 +136,13 @@ test('opening a valid project renders an accessible first chapter and focuses cl
   equal(state.state.activeProject.slug, 'test-story');
   equal(state.state.chapterIndex, 0);
   equal(dialog.getAttribute('aria-modal'), 'true');
-  const labelledBy = dialog.getAttribute('aria-labelledby');
-  assert(labelledBy && dialog.querySelector(`#${labelledBy}`));
-  equal(dialog.querySelector('[data-story-title]').textContent, 'Test Story');
+  equal(dialog.getAttribute('aria-label'), 'Test Story storybook');
+  equal(dialog.hasAttribute('aria-labelledby'), false);
   equal(dialog.querySelector('[data-story-chapter-title]').textContent, 'Overview: Test story');
   equal(document.activeElement, dialog.querySelector('[data-story-close]'));
   equal(dialog.querySelectorAll('[data-story-diamond]').length, 6);
-  equal(dialog.querySelectorAll('[data-story-pill]').length, 6);
+  equal(dialog.querySelectorAll('[data-story-pill]').length, 0);
   equal(dialog.querySelector('[data-story-diamond][data-chapter-index="0"]').getAttribute('aria-current'), 'step');
-  equal(dialog.querySelector('[data-story-pill][data-chapter-index="0"]').getAttribute('aria-current'), 'step');
 }));
 
 // Catches a missing slug mutating state, opening an empty modal, or stealing focus.
@@ -221,7 +219,6 @@ test('changing chapter resets the gallery and synchronizes diamonds and pills', 
   equal(state.state.imageIndex, 0);
   equal(dialog.querySelector('[data-gallery-count]').textContent, '01 / 01');
   equal(dialog.querySelector('[data-story-diamond][aria-current="step"]').dataset.chapterIndex, '3');
-  equal(dialog.querySelector('[data-story-pill][aria-current="step"]').dataset.chapterIndex, '3');
   equal(dialog.querySelector('[data-story-chapter-title]').textContent, 'Ideation: Test story');
 }));
 
@@ -249,7 +246,7 @@ test('the controller keeps all chapter and gallery navigation locked for the ful
   assert(dialog.classList.contains('is-turning-forward'));
   equal(reader.setChapter(2, 'forward'), false);
   equal(reader.moveImage(1), false);
-  assert([...dialog.querySelectorAll('[data-story-diamond], [data-story-pill]')].every(control => control.disabled));
+  assert([...dialog.querySelectorAll('[data-story-diamond]')].every(control => control.disabled));
   await wait(50);
   equal(state.state.chapterIndex, 1);
   equal(state.state.isTransitioning, false);
@@ -318,7 +315,7 @@ test('Coast and Coral small reader chrome has an opaque AA surface', async () =>
   for (const theme of ['coast', 'coral']) {
     await usingReader({ theme }, ({ reader, dialog, origin }) => {
       reader.open('test-story', origin);
-      const selectors = ['.storybook-brand', `[data-story-theme="${theme}"]`, '[data-story-project-type]', '.storybook-helper'];
+      const selectors = ['.storybook-brand', `[data-story-theme="${theme}"]`, '.storybook-helper'];
       for (const selector of selectors) {
         const element = dialog.querySelector(selector);
         const style = getComputedStyle(element);
