@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Portfolio tests</title>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=4">
+  <link rel="stylesheet" href="../assets/css/base.css?v=3">
+  <link rel="stylesheet" href="../assets/css/ocean.css?v=3">
+  <link rel="stylesheet" href="../assets/css/cards.css?v=1">
+  <link rel="stylesheet" href="../assets/css/storybook.css?v=3">
+  <link rel="stylesheet" href="../assets/css/sections.css?v=3">
+  <link rel="stylesheet" href="../assets/css/responsive.css?v=4">
+</head>
+<body>
+  <h1>Portfolio browser tests</h1>
+  <p id="test-summary" role="status">Running…</p>
+  <ol id="test-results"></ol>
+  <script type="module">
+    import { runSuites } from './harness.js';
+    await runSuites(['./state.test.js', './theme.test.js', './ocean.test.js?v=5', './cards.test.js?v=3', './storybook.test.js?v=5', './accessibility.test.js?v=3']);
+  </script>
+</body>
+</html>

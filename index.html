@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en" data-theme="coast">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e7f2eb">
+  <meta name="description" content="An ocean storybook portfolio for a UI/UX product designer. Personal details and illustrative projects are awaiting replacement.">
+  <title>Ocean Storybook · Design Portfolio</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;family=DM+Sans:wght@400;500;600;700&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=4">
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/ocean.css">
+  <link rel="stylesheet" href="assets/css/cards.css?v=1">
+  <link rel="stylesheet" href="assets/css/storybook.css?v=3">
+  <link rel="stylesheet" href="assets/css/sections.css?v=3">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=4">
+  <script type="module" src="assets/js/app.js?v=8"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="ocean-depth-wash" aria-hidden="true"></div>
+
+  <header class="site-header" id="site-header">
+    <div class="nav-inner">
+      <a class="site-brand" href="#home" aria-label="A little sea of stories, home">
+        <span class="brand-star" aria-hidden="true">✳</span>
+        <span>A little sea<br><em>of stories</em></span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" hidden>
+        <span class="menu-toggle-lines" aria-hidden="true"><i></i><i></i></span>
+        <span>Menu</span>
+      </button>
+
+      <nav aria-label="Main navigation" id="main-nav">
+        <a href="#home"><span>01</span> Home</a>
+        <a href="#work"><span>02</span> Work</a>
+        <a href="#about"><span>03</span> About</a>
+        <a href="#contact"><span>04</span> Contact</a>
+      </nav>
+
+      <div class="theme-controls" role="group" aria-label="Color theme">
+        <button class="theme-choice" type="button" data-theme-choice="coast" aria-pressed="true" title="Coast theme">
+          <span class="theme-swatch swatch-coast" aria-hidden="true"></span><span class="theme-label">Coast</span>
+        </button>
+        <button class="theme-choice" type="button" data-theme-choice="moon" aria-pressed="false" title="Moon theme">
+          <span class="theme-swatch swatch-moon" aria-hidden="true"></span><span class="theme-label">Moon</span>
+        </button>
+        <button class="theme-choice" type="button" data-theme-choice="coral" aria-pressed="false" title="Coral theme">
+          <span class="theme-swatch swatch-coral" aria-hidden="true"></span><span class="theme-label">Coral</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section id="home" class="hero-section" aria-labelledby="hero-title" tabindex="-1">
+      <div class="hero-sun" aria-hidden="true"></div>
+      <div class="hero-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="hero-orbit" aria-hidden="true"><span>✦</span><span>✳</span></div>
+
+      <div id="hero-content" class="hero-content">
+        <p class="eyebrow hero-eyebrow" data-reveal>UI/UX Product Designer <span aria-hidden="true">·</span> A tiny ocean of ideas</p>
+        <h1 id="hero-title" class="hero-title" aria-label="Good ideas come in waves">
+          <span class="hero-word hero-word-good">Good</span>
+          <span class="hero-word hero-word-ideas">ideas</span>
+          <span class="hero-word hero-word-come">come in</span>
+          <em class="hero-word hero-word-waves">waves.</em>
+        </h1>
+        <div class="hero-copy" data-reveal>
+          <p>Exploring thoughtful digital experiences with curiosity, care, and a little bit of magic.</p>
+          <a class="explore-link" href="#intro">Dive into my world <span aria-hidden="true">↘</span></a>
+        </div>
+        <p class="hero-handnote" aria-hidden="true">playful on the surface,<br>thoughtful underneath ↓</p>
+      </div>
+
+      <figure class="hero-jelly-stage" aria-label="A gentle watercolor jellyfish drifts beside the introduction">
+        <img src="assets/images/hero-jellyfish.png" width="1024" height="1536" alt="" decoding="async" fetchpriority="high">
+        <figcaption>our little guide</figcaption>
+      </figure>
+
+      <div class="hero-sticker" aria-hidden="true"><span>✦</span> make<br>some<br>waves!</div>
+      <a class="scroll-cue" href="#intro"><span>Scroll to explore</span><i aria-hidden="true"></i></a>
+
+      <div class="wave-scene" aria-hidden="true">
+        <svg class="wave wave-back" viewBox="0 0 1440 180" preserveAspectRatio="none"><path d="M0 85C150 24 275 138 451 78s292-24 452 22 323 38 537-34v114H0Z"/></svg>
+        <svg class="wave wave-mid" viewBox="0 0 1440 180" preserveAspectRatio="none"><path d="M0 105c185-48 272 33 458-14s319 74 484 17 289-50 498-6v78H0Z"/></svg>
+        <svg class="wave wave-front" viewBox="0 0 1440 180" preserveAspectRatio="none"><path d="M0 126c182-38 311 27 485-5s309 29 467 3 290-29 488 6v50H0Z"/></svg>
+      </div>
+    </section>
+
+    <section id="intro" class="intro-section" aria-labelledby="intro-title">
+      <div class="section-index" aria-hidden="true"><span>01</span><i></i><span>HELLO</span></div>
+      <div class="intro-grid">
+        <div class="intro-heading" data-reveal>
+          <p class="eyebrow">A note from the shore</p>
+          <h2 id="intro-title">Hello, I’m<br><em data-profile="displayName">[Replace with your name]</em><span aria-hidden="true">.</span></h2>
+          <p class="intro-role" data-profile="role">UI/UX product designer — [replace with your role]</p>
+        </div>
+
+        <div id="intro-content" class="intro-story" data-reveal>
+          <p class="intro-lede" data-profile="intro">[Replace with a short introduction to your practice and the people you design for.]</p>
+          <p data-profile="philosophy">[Replace with your design philosophy: what matters to you, and why.]</p>
+          <div class="principle-row" aria-label="Portfolio principles"><span>Playful presentation</span><i aria-hidden="true">✳</i><span>Thoughtful experience</span></div>
+        </div>
+
+        <aside class="paper-note" data-reveal>
+          <span aria-hidden="true">✎</span>
+          <p data-profile="note">A little space for curiosity — [replace with your own note].</p>
+          <i aria-hidden="true">your note here ↗</i>
+        </aside>
+
+        <div class="intro-collage" aria-hidden="true" data-reveal>
+          <span class="collage-shell">◒</span>
+          <span class="collage-type">observe<br>listen<br><em>make</em></span>
+          <span class="collage-arrow">↝</span>
+        </div>
+      </div>
+      <p class="intro-marquee" aria-hidden="true"><span>CURIOUS MINDS · KIND DETAILS · USEFUL THINGS · CURIOUS MINDS · KIND DETAILS · USEFUL THINGS ·</span></p>
+    </section>
+
+    <section id="work" class="work-section" aria-labelledby="work-title">
+      <div class="section-index section-index-light" aria-hidden="true"><span>02</span><i></i><span>EXPLORE</span></div>
+      <div class="work-heading" data-reveal>
+        <p class="eyebrow">Selected explorations</p>
+        <h2 id="work-title">Little worlds<br>I’ve <em>imagined</em><span aria-hidden="true">✳</span></h2>
+        <p>Six illustrative concepts, ready to be replaced with your own work. No client work or research outcomes are claimed.</p>
+      </div>
+      <div id="project-grid" class="project-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="about" class="about-section" aria-labelledby="about-title">
+      <div class="section-index section-index-light" aria-hidden="true"><span>03</span><i></i><span>BELOW THE SURFACE</span></div>
+      <div class="about-layout">
+        <div class="about-heading" data-reveal>
+          <p class="eyebrow">A few fathoms deeper</p>
+          <h2 id="about-title">My underwater<br><em>world.</em></h2>
+          <p class="about-kicker">A quiet place for the story, skills, and small curiosities behind the work.</p>
+        </div>
+
+        <div id="about-content" class="about-copy" data-reveal>
+          <p>[Replace with your personal story, in your own words.]</p>
+          <p>[Replace with the way you approach design, collaboration, and learning.]</p>
+        </div>
+
+        <div class="about-lists" data-reveal>
+          <section class="about-list" aria-labelledby="skills-title">
+            <h3 id="skills-title"><span aria-hidden="true">✦</span> Design toolkit</h3>
+            <ul id="skill-list"><li>[Replace with a design skill]</li><li>[Replace with a collaboration skill]</li></ul>
+          </section>
+          <section class="about-list" aria-labelledby="interests-title">
+            <h3 id="interests-title"><span aria-hidden="true">◌</span> Beyond the screen</h3>
+            <ul id="interest-list"><li>[Replace with a personal interest]</li></ul>
+          </section>
+        </div>
+
+        <div class="discoveries" role="group" aria-label="Small ocean discoveries" data-reveal>
+          <div class="discovery discovery-shell">
+            <button class="discovery-button" type="button" aria-expanded="false" aria-controls="shell-note">
+              <span class="discovery-icon" aria-hidden="true">◒</span>
+              <span>Listen to a shell</span>
+              <span class="discovery-plus" aria-hidden="true">+</span>
+            </button>
+            <p class="discovery-note" id="shell-note" hidden>A pocket-sized reminder: listen before making.</p>
+          </div>
+          <div class="discovery discovery-star">
+            <button class="discovery-button" type="button" aria-expanded="false" aria-controls="star-note">
+              <span class="discovery-icon" aria-hidden="true">✦</span>
+              <span>Turn over a star</span>
+              <span class="discovery-plus" aria-hidden="true">+</span>
+            </button>
+            <p class="discovery-note" id="star-note" hidden>Curiosity belongs in the process, not just the polish.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reef-scene" aria-hidden="true">
+        <span class="reef-fish reef-fish-one">◖</span><span class="reef-fish reef-fish-two">◖</span>
+        <span class="reef-bubble reef-bubble-one"></span><span class="reef-bubble reef-bubble-two"></span><span class="reef-bubble reef-bubble-three"></span>
+        <img src="assets/images/reef-garden.png" width="2172" height="724" alt="" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <div class="section-index section-index-light" aria-hidden="true"><span>04</span><i></i><span>SAY HELLO</span></div>
+      <div class="contact-layout">
+        <div class="contact-heading" data-reveal>
+          <p class="eyebrow">Send a little signal</p>
+          <h2 id="contact-title">Let’s make<br>a <em>ripple.</em></h2>
+          <p id="contact-replacement-note">Contact details are awaiting replacement with your own email, LinkedIn, and résumé.</p>
+        </div>
+        <div class="contact-actions" data-reveal>
+          <div id="contact-links" class="contact-links" aria-live="polite"></div>
+          <a class="back-to-surface" href="#home">
+            <span class="surface-arrow" aria-hidden="true">↑</span>
+            <span>Back to the surface</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-constellation" aria-hidden="true"><i></i><i></i><i></i><span>✦</span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><span aria-hidden="true">✳</span> A little ocean of ideas</p>
+    <p>Personal details and illustrative content are awaiting replacement.</p>
+    <p aria-hidden="true">The tide will bring us back around.</p>
+  </footer>
+  <dialog id="storybook-dialog"></dialog>
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="icon-diamond" viewBox="0 0 24 24"><path d="m12 2 10 10-10 10L2 12Z" fill="currentColor"/></symbol>
+  </svg>
+</body>
+</html>

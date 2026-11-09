@@ -1,0 +1,155 @@
+.about-section {
+  --about-top: color-mix(in srgb, var(--mid-water) 55%, var(--deep-water));
+  --deep-panel: color-mix(in srgb, var(--deep-water) 88%, black);
+  --deep-panel-soft: color-mix(in srgb, var(--mid-water) 24%, var(--deep-water));
+  --deep-line: color-mix(in srgb, var(--ink-on-deep) 24%, transparent);
+  min-height: 68rem;
+  padding-top: clamp(8rem, 12vw, 12rem);
+  padding-bottom: clamp(20rem, 30vw, 29rem);
+  overflow: clip;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 82% 14%, color-mix(in srgb, var(--bubble) 9%, transparent) 0 .45rem, transparent .55rem),
+    radial-gradient(circle at 10% 32%, color-mix(in srgb, var(--bubble) 8%, transparent) 0 .3rem, transparent .4rem),
+    linear-gradient(175deg, var(--about-top) 0%, var(--deep-water) 57%, color-mix(in srgb, var(--deep-water) 80%, black) 100%);
+  color: var(--ink-on-deep);
+  --focus: var(--focus-on-deep);
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 13%;
+  right: -11rem;
+  width: 32rem;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--bubble) 14%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4rem color-mix(in srgb, var(--bubble) 2%, transparent), 0 0 0 9rem color-mix(in srgb, var(--bubble) 2%, transparent);
+}
+
+.about-layout {
+  position: relative;
+  z-index: 3;
+  width: min(100%, var(--content-width));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(20rem, .92fr);
+  grid-template-areas: "heading copy" "lists discoveries";
+  align-items: start;
+  gap: clamp(3rem, 7vw, 7rem) clamp(3rem, 8vw, 8rem);
+}
+
+.about-heading { grid-area: heading; }
+.about-section .section-index-light { color: var(--ink-on-deep); opacity: 1; }
+.about-heading .eyebrow { margin-bottom: 1.5rem; color: var(--ink-on-deep); }
+.about-heading h2 { margin: 0; font-family: var(--font-body); font-size: clamp(4rem, 8vw, 8.25rem); font-weight: 650; line-height: .8; letter-spacing: -.075em; text-transform: uppercase; }
+.about-heading h2 em { display: inline-block; margin-left: 8%; color: var(--coral-pink); font: italic 400 .95em/.9 var(--font-display); letter-spacing: -.055em; text-transform: none; transform: rotate(-3deg); }
+.about-kicker { width: min(31rem, 82%); margin: 2.5rem 0 0 8%; color: var(--ink-on-deep); font-size: clamp(.95rem, 1.35vw, 1.08rem); }
+
+.about-copy {
+  grid-area: copy;
+  margin-top: clamp(2rem, 7vw, 7rem);
+  padding: clamp(1.7rem, 3vw, 2.5rem);
+  border: 1px solid var(--deep-line);
+  border-radius: 1.35rem 1.35rem 1.35rem .3rem;
+  background: var(--deep-panel);
+  box-shadow: 0 1.5rem 4rem rgb(0 15 27 / 22%);
+}
+.about-copy::before { content: "✦  A NOTE FROM BELOW"; display: block; margin-bottom: 1.2rem; color: var(--mint); font-size: .65rem; font-weight: 700; letter-spacing: .16em; }
+.about-copy p { margin-bottom: 1.1rem; color: var(--ink-on-deep); }
+.about-copy p:first-of-type { font: italic 400 clamp(1.2rem, 2vw, 1.65rem)/1.45 var(--font-display); }
+.about-copy p:last-child { margin-bottom: 0; color: color-mix(in srgb, var(--ink-on-deep) 78%, transparent); }
+
+.about-lists { grid-area: lists; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.about-list { min-width: 0; padding: 0; }
+.about-list h3 { margin: 0 0 1rem; color: var(--ink-on-deep); font: 600 .72rem/1.4 var(--font-body); letter-spacing: .12em; text-transform: uppercase; }
+.about-list h3 span { margin-right: .45rem; color: var(--coral-pink); }
+.about-list ul { margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .55rem; list-style: none; }
+.about-list li { padding: .55rem .75rem; border: 1px solid var(--deep-line); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--deep-panel-soft) 80%, transparent); color: var(--ink-on-deep); font-size: .72rem; }
+
+.discoveries { grid-area: discoveries; display: grid; gap: .8rem; }
+.discovery { border-bottom: 1px solid var(--deep-line); }
+.discovery-button { width: 100%; min-height: 4rem; padding: .65rem .2rem; display: grid; grid-template-columns: 2.8rem 1fr auto; align-items: center; gap: .8rem; border: 0; background: transparent; color: var(--ink-on-deep); text-align: left; }
+.discovery-button > span:nth-child(2) { font: italic 400 1.15rem var(--font-display); }
+.discovery-icon { display: grid; place-items: center; width: 2.6rem; aspect-ratio: 1; border: 1px solid var(--deep-line); border-radius: 50%; background: color-mix(in srgb, var(--bubble) 9%, transparent); color: var(--coral-pink); font-size: 1.4rem; transition: transform .25s ease, background .25s ease; }
+.discovery-plus { color: var(--mint); font-size: 1.4rem; transition: transform .25s ease; }
+.discovery-button:hover .discovery-icon, .discovery-button:focus-visible .discovery-icon { background: color-mix(in srgb, var(--bubble) 18%, transparent); transform: rotate(-8deg) scale(1.04); }
+.discovery-button[aria-expanded="true"] .discovery-plus { transform: rotate(45deg); }
+.discovery-note { margin: 0; padding: 0 3rem 1.15rem 3.6rem; color: color-mix(in srgb, var(--ink-on-deep) 78%, transparent); font-size: .82rem; }
+
+.reef-scene { position: absolute; z-index: 2; inset: auto 0 -1px; height: clamp(17rem, 31vw, 29rem); pointer-events: none; }
+.reef-scene::before { content: ""; position: absolute; inset: 30% 0 0; background: linear-gradient(transparent, color-mix(in srgb, var(--deep-water) 72%, black)); }
+.reef-scene img { position: absolute; z-index: 2; inset: auto 50% 0 auto; width: max(87rem, 112vw); max-width: none; height: auto; transform: translateX(50%); filter: drop-shadow(0 -1rem 2rem rgb(0 18 31 / 15%)); }
+.reef-fish { position: absolute; z-index: 1; color: color-mix(in srgb, var(--mint) 62%, transparent); font-size: 2rem; animation: reef-fish-swim 14s ease-in-out infinite; }
+.reef-fish::after { content: "›"; display: inline-block; margin-left: -.25rem; font-size: 1.4rem; transform: rotate(180deg); }
+.reef-fish-one { top: 12%; left: 18%; }
+.reef-fish-two { top: 31%; right: 17%; font-size: 1.25rem; animation-delay: -7s; animation-direction: reverse; }
+.reef-bubble { position: absolute; z-index: 1; width: 1rem; aspect-ratio: 1; border: 1px solid color-mix(in srgb, var(--bubble) 50%, transparent); border-radius: 50%; animation: reef-bubble-rise 8s ease-in-out infinite; }
+.reef-bubble-one { left: 35%; bottom: 20%; }
+.reef-bubble-two { left: 38%; bottom: 30%; width: .55rem; animation-delay: -3s; }
+.reef-bubble-three { right: 26%; bottom: 25%; width: 1.4rem; animation-delay: -5s; }
+
+.contact-section {
+  min-height: 46rem;
+  padding-top: clamp(8rem, 13vw, 12rem);
+  padding-bottom: clamp(7rem, 12vw, 10rem);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 72% 42%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 28%),
+    linear-gradient(155deg, color-mix(in srgb, var(--deep-water) 94%, black), color-mix(in srgb, var(--deep-water) 72%, black));
+  color: var(--ink-on-deep);
+  --focus: var(--focus-on-deep);
+}
+.contact-layout { width: min(100%, var(--content-width)); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .9fr); align-items: end; gap: clamp(4rem, 10vw, 10rem); }
+.contact-heading .eyebrow { margin-bottom: 1.5rem; color: var(--mint); }
+.contact-heading h2 { margin: 0; font-family: var(--font-body); font-size: clamp(4rem, 8.5vw, 8.6rem); font-weight: 650; line-height: .78; letter-spacing: -.08em; text-transform: uppercase; }
+.contact-heading h2 em { color: var(--coral-pink); font: italic 400 1em/.8 var(--font-display); text-transform: none; }
+#contact-replacement-note { margin: 2.2rem 0 0; color: color-mix(in srgb, var(--ink-on-deep) 78%, transparent); }
+.contact-actions { padding-bottom: .5rem; }
+.contact-links { display: grid; border-top: 1px solid color-mix(in srgb, var(--ink-on-deep) 24%, transparent); }
+.contact-link { min-height: 5rem; padding: 1rem .25rem; display: grid; grid-template-columns: 6rem 1fr auto; align-items: center; gap: 1rem; border-bottom: 1px solid color-mix(in srgb, var(--ink-on-deep) 24%, transparent); color: var(--ink-on-deep); text-decoration: none; }
+.contact-link-label { color: var(--mint); font-size: .66rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.contact-link-detail { overflow: hidden; font: italic 400 1.05rem var(--font-display); text-overflow: ellipsis; white-space: nowrap; }
+.contact-link-arrow { display: grid; place-items: center; width: 2.4rem; aspect-ratio: 1; border: 1px solid color-mix(in srgb, var(--ink-on-deep) 30%, transparent); border-radius: 50%; transition: transform .25s ease, background .25s ease; }
+.contact-link:hover .contact-link-arrow, .contact-link:focus-visible .contact-link-arrow { background: var(--coral-pink); color: var(--deep-water); transform: translate(.2rem, -.2rem); }
+.back-to-surface { width: fit-content; margin-top: 2.4rem; display: inline-flex; align-items: center; gap: .9rem; color: var(--ink-on-deep); text-decoration: none; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.surface-arrow { display: grid; place-items: center; width: 3.4rem; aspect-ratio: 1; border: 1px solid color-mix(in srgb, var(--ink-on-deep) 35%, transparent); border-radius: 50%; background: color-mix(in srgb, var(--bubble) 8%, transparent); font-size: 1.25rem; transition: transform .3s ease, background .3s ease; }
+.back-to-surface:hover .surface-arrow, .back-to-surface:focus-visible .surface-arrow { background: var(--mint); color: var(--deep-water); transform: translateY(-.3rem); }
+.contact-constellation { position: absolute; z-index: -1; top: 18%; right: 4%; width: 18rem; aspect-ratio: 1; border: 1px dashed color-mix(in srgb, var(--ink-on-deep) 13%, transparent); border-radius: 50%; animation: slow-spin 38s linear infinite; }
+.contact-constellation i { position: absolute; width: .6rem; aspect-ratio: 1; border: 1px solid color-mix(in srgb, var(--bubble) 52%, transparent); border-radius: 50%; }
+.contact-constellation i:nth-child(1) { top: 2%; left: 52%; }
+.contact-constellation i:nth-child(2) { right: 9%; bottom: 20%; width: 1.15rem; }
+.contact-constellation i:nth-child(3) { left: 8%; bottom: 28%; width: .4rem; }
+.contact-constellation span { position: absolute; top: 19%; right: 11%; color: var(--coral-pink); }
+
+.site-footer { padding-block: 2.2rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; border-top: 1px solid color-mix(in srgb, var(--ink-on-deep) 16%, transparent); background: color-mix(in srgb, var(--deep-water) 68%, black); color: color-mix(in srgb, var(--ink-on-deep) 74%, transparent); font-size: .66rem; letter-spacing: .08em; }
+.site-footer p { margin: 0; }
+.site-footer p:first-child { color: var(--ink-on-deep); font-weight: 700; text-transform: uppercase; }
+.site-footer p:first-child span { margin-right: .35rem; color: var(--coral-pink); }
+.site-footer p:nth-child(2) { text-align: center; }
+.site-footer p:last-child { justify-self: end; font: 500 1rem var(--font-note); letter-spacing: 0; }
+
+@keyframes reef-fish-swim {
+  0%, 100% { transform: translate3d(-1rem, .2rem, 0); }
+  50% { transform: translate3d(3rem, -1.2rem, 0); }
+}
+@keyframes reef-bubble-rise {
+  0%, 100% { opacity: .15; transform: translateY(1.5rem) scale(.75); }
+  50% { opacity: .75; transform: translateY(-2.5rem) scale(1); }
+}
+
+[data-theme="moon"] .about-section { --deep-panel: #18243c; --deep-panel-soft: #253554; }
+[data-theme="coral"] .about-section { --deep-panel: #382d42; --deep-panel-soft: #594356; }
+
+@media (hover: none), (pointer: coarse) {
+  .discovery-button { min-height: 4.5rem; }
+  .discovery-icon { background: color-mix(in srgb, var(--bubble) 16%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reef-fish, .reef-bubble, .contact-constellation { animation: none; }
+  .discovery-icon, .discovery-plus, .contact-link-arrow, .surface-arrow { transition: none; }
+}
