@@ -4,7 +4,7 @@ import { projects, profile, contact } from './content.js?v=2';
 import { createStoryState } from './state.js';
 import { createThemeController } from './theme.js';
 import { initNavigation, initOcean } from './ocean.js';
-import { renderProjectCards } from './cards.js?v=3';
+import { renderProjectCards } from './cards.js?v=4';
 import { createStorybook } from './storybook.js?v=3';
 import { renderAbout, renderContact, initDiscoveries, initBackToSurface, syncPointerMode } from './sections.js?v=3';
 

@@ -39,10 +39,7 @@ test('project cards expose complete sample content and replaceable media slots',
     const character = card.querySelector('[data-card-silhouette] img.project-card-character-art');
     assert(character, `${project.title} is missing its watercolor character art`);
     assert(character.src.includes(project.characterMedia.src));
-    const media = card.querySelector('[data-cover-media]');
-    assert(media, `${project.title} is missing its media slot`);
-    assert(media.getAttribute('aria-label').includes(project.title));
-    assert(media.querySelector('.project-cover-placeholder'), `${project.title} lost its independent project-cover slot`);
+    equal(card.querySelector('[data-cover-media]'), null, `${project.title} still renders the removed cover placeholder`);
     const action = card.querySelector('button[data-project-open]');
     assert(action, `${project.title} is missing a native open action`);
     equal(action.type, 'button');

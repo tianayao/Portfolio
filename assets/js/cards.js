@@ -70,32 +70,6 @@ function safeAccent(value) {
   return typeof value === 'string' && /^#(?:[\da-f]{3}|[\da-f]{4}|[\da-f]{6}|[\da-f]{8})$/i.test(value) ? value : '#6f718b';
 }
 
-function buildMedia(doc, project) {
-  const media = element(doc, 'figure', 'project-cover-media');
-  media.dataset.coverMedia = '';
-  media.setAttribute('role', 'img');
-  media.setAttribute('aria-label', project.coverMedia?.alt || `Illustrative ${project.title} cover awaiting replacement`);
-
-  if (project.coverMedia?.src) {
-    const image = element(doc, 'img', 'project-cover-image');
-    image.src = project.coverMedia.src;
-    image.alt = project.coverMedia.alt || '';
-    image.loading = 'lazy';
-    image.decoding = 'async';
-    media.classList.add('has-cover-art');
-    media.append(image);
-  } else {
-    const placeholder = element(doc, 'span', 'project-cover-placeholder');
-    placeholder.setAttribute('aria-hidden', 'true');
-    placeholder.append(
-      element(doc, 'span', 'project-cover-mark', '✦'),
-      element(doc, 'span', 'project-cover-label', 'replace cover'),
-    );
-    media.append(placeholder);
-  }
-  return media;
-}
-
 function resetOpening(container) {
   container.classList.remove('is-project-opening');
   for (const card of container.querySelectorAll('[data-project-card]')) card.classList.remove('is-focal');
@@ -141,7 +115,7 @@ export function renderProjectCards(container, projects, onOpen = () => {}) {
     } else {
       silhouette.innerHTML = getShapeTemplate(shape);
     }
-    visual.append(number, silhouette, buildMedia(doc, project));
+    visual.append(number, silhouette);
 
     const bubbles = element(doc, 'span', 'project-card-bubbles');
     bubbles.setAttribute('aria-hidden', 'true');
