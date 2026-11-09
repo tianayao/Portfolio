@@ -56,8 +56,14 @@
 }
 .project-card-silhouette svg { width: 100%; height: 100%; overflow: visible; }
 .project-card-character-art {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 1.7rem 1.5rem rgb(7 32 43 / 22%));
   transform: translate(var(--character-x, 0), var(--character-y, 0)) scale(var(--character-scale, 1));
@@ -75,7 +81,7 @@
 .project-card--conch { --character-scale: .9; --character-y: 1%; --character-hover-scale: .95; --bubble-paper: #f2eafa; --bubble-radius: 44% 56% 58% 42% / 24% 18% 82% 76%; }
 .project-card--whale { --character-scale: .98; --character-x: 1%; --character-y: -1%; --character-hover-scale: 1.03; --bubble-paper: #e8f1f7; --bubble-radius: 52% 48% 42% 58% / 19% 26% 74% 81%; }
 .project-card--turtle { --character-scale: .91; --character-y: 1%; --character-hover-scale: .96; --bubble-paper: #e9f4eb; --bubble-radius: 46% 54% 55% 45% / 27% 18% 82% 73%; }
-.project-card--jellyfish { --character-scale: .88; --character-y: -1%; --character-hover-scale: .93; --bubble-paper: #f8ece6; --bubble-radius: 58% 42% 48% 52% / 21% 24% 76% 79%; }
+.project-card--jellyfish { --character-scale: .76; --character-x: 3%; --character-y: -3%; --character-hover-scale: .8; --copy-y: 1.5rem; --bubble-paper: #f8ece6; --bubble-radius: 58% 42% 48% 52% / 21% 24% 76% 79%; }
 
 .project-card-bubbles { position: absolute; z-index: 3; inset: 7% 5%; pointer-events: none; }
 .project-card-bubble { position: absolute; display: block; width: 1.1rem; aspect-ratio: 1; border: 1px solid rgb(255 255 255 / 72%); border-radius: 50%; background: color-mix(in srgb, var(--bubble) 28%, transparent); opacity: 0; box-shadow: inset -.2rem -.2rem .45rem rgb(20 72 82 / 12%); }
@@ -89,9 +95,11 @@
 .project-card-copy {
   position: relative;
   z-index: 5;
+  display: flex;
+  flex-direction: column;
   width: min(91%, 29rem);
   min-height: 19rem;
-  margin: clamp(-5rem, -7vw, -3.5rem) auto 0;
+  margin: calc(clamp(-5rem, -7vw, -3.5rem) + var(--copy-y, 0rem)) auto 0;
   padding: clamp(2.2rem, 3.6vw, 3.1rem) clamp(2rem, 4vw, 3.4rem);
   border: 1px solid color-mix(in srgb, var(--paper-border) 78%, transparent);
   border-radius: var(--bubble-radius, 3rem);
@@ -107,7 +115,7 @@
 .project-card-type { margin: .85rem 0 0; color: color-mix(in srgb, var(--paper-ink) 70%, transparent); font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
 .project-card-note { margin: 1.25rem 0 1.35rem; padding: 1rem 1.05rem .85rem; border-left: 2px solid var(--card-accent); background: color-mix(in srgb, var(--shape-soft) 45%, transparent); transform: translateY(.2rem); transition: transform .3s ease, background .3s ease; }
 .project-card-note p { margin: 0; font: 500 .92rem/1.55 var(--font-body); }
-.project-open-button { position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: space-between; gap: 2rem; min-width: 10.5rem; min-height: 2.9rem; padding: .65rem .75rem .65rem 1rem; border: 1px solid color-mix(in srgb, var(--card-accent) 60%, var(--paper-border)); border-radius: var(--radius-pill); background: transparent; color: color-mix(in srgb, var(--card-accent) 82%, var(--paper-ink)); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; transition: color .25s ease, background .25s ease, transform .25s ease; }
+.project-open-button { position: relative; z-index: 2; display: inline-flex; align-self: center; align-items: center; justify-content: space-between; gap: 2rem; width: min(100%, 12rem); min-width: 10.5rem; min-height: 2.9rem; margin: auto auto 1rem; padding: .65rem .75rem .65rem 1rem; border: 1px solid color-mix(in srgb, var(--card-accent) 60%, var(--paper-border)); border-radius: var(--radius-pill); background: transparent; color: color-mix(in srgb, var(--card-accent) 82%, var(--paper-ink)); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; transition: color .25s ease, background .25s ease, transform .25s ease; }
 .project-open-arrow { display: grid; place-items: center; width: 1.7rem; aspect-ratio: 1; border-radius: 50%; background: var(--card-accent); color: var(--paper); font-size: 1rem; transition: transform .28s ease; }
 .project-open-button:hover, .project-open-button:focus-visible { background: var(--card-accent); color: var(--paper); transform: translateY(-2px); }
 .project-open-button:hover .project-open-arrow, .project-open-button:focus-visible .project-open-arrow { background: var(--paper); color: var(--card-accent); transform: rotate(45deg); }
@@ -150,15 +158,16 @@
   .project-grid { width: min(100%, 34rem); grid-template-columns: 1fr; gap: 6rem; }
   .project-card:nth-child(even) { margin-top: 0; }
   .project-card-visual { max-height: 31rem; }
-  .project-card-copy { width: min(94%, 29rem); min-height: auto; margin-top: -4rem; padding-inline: clamp(2rem, 9vw, 3.3rem); }
+  .project-card--jellyfish { --copy-y: 2.5rem; }
+  .project-card-copy { width: min(94%, 29rem); min-height: auto; margin-top: calc(-4rem + var(--copy-y, 0rem)); padding-inline: clamp(2rem, 9vw, 3.3rem); }
 }
 
 @media (max-width: 440px) {
   .project-grid { margin-top: 4rem; gap: 4.75rem; }
   .project-card-visual { aspect-ratio: 1.05; }
-  .project-card-copy { width: 94%; padding: 1.45rem; margin-top: -2.8rem; }
+  .project-card-copy { width: 94%; padding: 1.45rem 1.45rem 2rem; margin-top: calc(-2.8rem + var(--copy-y, 0rem)); }
   .project-card-title { font-size: 2.65rem; }
-  .project-open-button { width: 100%; }
+  .project-open-button { width: min(100%, 12rem); margin-bottom: .65rem; }
 }
 
 @media (hover: none), (pointer: coarse) {

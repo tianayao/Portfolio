@@ -48,6 +48,51 @@ test('project cards expose complete sample content and replaceable media slots',
   });
 });
 
+async function withRenderedMobileCards(run) {
+  const container = document.createElement('div');
+  container.className = 'project-grid';
+  container.style.width = '350px';
+  renderProjectCards(container, projects, () => {});
+  document.body.append(container);
+  try {
+    const images = [...container.querySelectorAll('img')];
+    images.forEach(image => { image.loading = 'eager'; });
+    await Promise.all(images.map(image => image.complete ? Promise.resolve() : new Promise(resolve => {
+      image.addEventListener('load', resolve, { once: true });
+      image.addEventListener('error', resolve, { once: true });
+    })));
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    await run(container);
+  } finally {
+    container.remove();
+  }
+}
+
+// Catches mobile buttons drifting into the tapered bubble edge.
+test('mobile card actions keep a safe inset from both bubble edges', async () => {
+  await withRenderedMobileCards(container => {
+    for (const card of container.querySelectorAll('[data-project-card]')) {
+      const copy = card.querySelector('.project-card-copy').getBoundingClientRect();
+      const action = card.querySelector('.project-open-button').getBoundingClientRect();
+      assert(action.left - copy.left >= 32, `${card.dataset.projectCard} action is too close to the left bubble edge`);
+      assert(copy.right - action.right >= 32, `${card.dataset.projectCard} action is too close to the right bubble edge`);
+    }
+  });
+});
+
+// Catches the tall Drift Space artwork escaping its visual frame and being obscured by the copy card.
+test('the sixth portrait stays inside its visual frame and its copy clears the artwork', async () => {
+  await withRenderedMobileCards(container => {
+    const sixth = container.querySelector('[data-project-card="drift-space"]');
+    const visual = sixth.querySelector('.project-card-visual').getBoundingClientRect();
+    const art = sixth.querySelector('.project-card-character-art').getBoundingClientRect();
+    const copy = sixth.querySelector('.project-card-copy').getBoundingClientRect();
+    assert(art.top >= visual.top - 1, 'Drift Space artwork escapes above its visual frame');
+    assert(art.bottom <= visual.bottom + 1, 'Drift Space artwork is hidden behind the copy card');
+    assert(copy.top >= visual.bottom - 8, 'Drift Space copy card overlaps too much of the portrait');
+  });
+});
+
 // Catches the wrong slug, a detached origin, or duplicate callbacks for one pointer activation.
 test('pointer activation emits one valid slug and the originating button', () => {
   const { container } = fixture();
