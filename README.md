@@ -2,7 +2,7 @@
 
 A dependency-free, responsive product-design portfolio with a continuous ocean narrative and an in-page Storybook case-study reader. It is built with semantic HTML, focused CSS layers, and browser-native ES modules, so it can be served directly from the repository root on GitHub Pages.
 
-The six included projects are explicitly illustrative concepts. They are placeholders for structure and interaction—not claims of delivered client work, completed research, or measured outcomes.
+Three real case studies and three explicitly illustrative concepts are included. The concepts are placeholders for structure and interaction—not claims of delivered client work, completed research, or measured outcomes.
 
 ## Local preview
 
@@ -44,12 +44,13 @@ Edit `assets/js/content.js` first. The interface copy and media remain safe when
 | Replace | Location | Notes |
 | --- | --- | --- |
 | Name, role, introduction, philosophy, About story | `profile` | Replace every bracketed fallback with your own verified text. |
-| Skills and interests | `profile.skills`, `profile.interests` | Arrays render as accessible lists. |
+| Capability groups | `profile.skillGroups` | Three ordered groups render as accessible lists; keep each title and item grounded in real experience. |
 | Email, LinkedIn, résumé, extra links | `contact` | Null values create no destination. Use a real email, HTTPS URL, or local résumé path. |
 | Project title, type, summary, accent | `projects` source records | Keep `illustrative: true` until the content describes real, supported work. |
 | Six case-study chapters | `chapters` created by `chaptersFor()` | Replace narrative, insight, and evidence chapter by chapter. |
 | Card cover media | each project’s `coverMedia` | Set `src`, accurate `alt`, and optional caption. |
 | Storybook gallery media | each chapter’s `images` | Each image is independent: set `src`, accurate `alt`, and caption without changing the card silhouette. |
+| SnuffMouth evidence | `assets/images/snuffmouth/` | Local course-project renders used by the real Design Robotics case study. |
 | Hero art | `assets/images/hero-jellyfish.png` | Preserve the intrinsic ratio or update the HTML width/height values. |
 | Reef art | `assets/images/reef-garden.png` | Keep a transparent background; update intrinsic dimensions if replaced. |
 

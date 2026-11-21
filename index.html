@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#e7f2eb">
-  <meta name="description" content="An ocean storybook portfolio for a UI/UX product designer. Personal details and illustrative projects are awaiting replacement.">
+  <meta name="description" content="An ocean storybook portfolio featuring three real case studies and three illustrative concepts.">
   <title>Ocean Storybook · Design Portfolio</title>
   <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,12 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;family=DM+Sans:wght@400;500;600;700&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tokens.css?v=4">
   <link rel="stylesheet" href="assets/css/base.css?v=3">
-  <link rel="stylesheet" href="assets/css/ocean.css">
-  <link rel="stylesheet" href="assets/css/cards.css?v=4">
-  <link rel="stylesheet" href="assets/css/storybook.css?v=4">
-  <link rel="stylesheet" href="assets/css/sections.css?v=3">
-  <link rel="stylesheet" href="assets/css/responsive.css?v=5">
-  <script type="module" src="assets/js/app.js?v=10"></script>
+  <link rel="stylesheet" href="assets/css/ocean.css?v=11">
+  <link rel="stylesheet" href="assets/css/cards.css?v=6">
+  <link rel="stylesheet" href="assets/css/storybook.css?v=11">
+  <link rel="stylesheet" href="assets/css/sections.css?v=4">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=8">
+  <script type="module" src="assets/js/app.js?v=30"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -97,26 +97,67 @@
       <div class="intro-grid">
         <div class="intro-heading" data-reveal>
           <p class="eyebrow">A note from the shore</p>
-          <h2 id="intro-title">Hello, I’m<br><em data-profile="displayName">[Replace with your name]</em><span aria-hidden="true">.</span></h2>
-          <p class="intro-role" data-profile="role">UI/UX product designer — [replace with your role]</p>
+          <h2 id="intro-title">Hi, I'm<br><em data-profile="displayName">Tina!</em></h2>
+          <p class="intro-role"><em data-profile="role">Curious about people. Playful with technology.</em></p>
         </div>
 
         <div id="intro-content" class="intro-story" data-reveal>
-          <p class="intro-lede" data-profile="intro">[Replace with a short introduction to your practice and the people you design for.]</p>
-          <p data-profile="philosophy">[Replace with your design philosophy: what matters to you, and why.]</p>
-          <div class="principle-row" aria-label="Portfolio principles"><span>Playful presentation</span><i aria-hidden="true">✳</i><span>Thoughtful experience</span></div>
+          <div class="intro-copy-group intro-copy-group--background" data-profile-paragraphs="intro">
+            <p>Originally from China and now based in London, I work across creative marketing, audience research and experience design. I'm curious about how people discover, understand and respond to stories across cultures and platforms.</p>
+            <p>With a background in <strong>Interactive Media and Design Informatics</strong>, I bring together content strategy, visual storytelling and emerging technology to turn audience insight into clear, engaging digital experiences.</p>
+            <p>My experience spans SEO and content operations, social and community communication, UX research, interactive prototyping, physical computing and robotic installations. I enjoy following an idea from early observation through making, testing and delivery.</p>
+          </div>
+          <div class="intro-copy-group intro-copy-group--philosophy" data-profile-paragraphs="philosophy">
+            <p>To me, good creative work begins with understanding the audience: what they notice, what they care about and what helps an idea stay with them.</p>
+            <p>I combine <strong>empathy, cultural curiosity and experimentation</strong> with evidence from research and performance data. Whether I'm shaping content, a campaign or an interactive experience, I want the result to feel useful, distinctive and a little playful.</p>
+          </div>
         </div>
 
-        <aside class="paper-note" data-reveal>
-          <span aria-hidden="true">✎</span>
-          <p data-profile="note">A little space for curiosity — [replace with your own note].</p>
-          <i aria-hidden="true">your note here ↗</i>
-        </aside>
+        <div class="intro-exploration" data-reveal>
+          <div class="intro-exploration-copy">
+            <section id="intro-concepts" class="intro-concepts" data-active-concept="observe" aria-labelledby="intro-concepts-title">
+              <p id="intro-concepts-title" class="eyebrow">Three ways curiosity becomes design</p>
+              <div class="concept-stage">
+                <div class="concept-visual" aria-hidden="true">
+                  <span class="concept-blob"><i></i><i></i><b></b></span>
+                  <span class="concept-doodle">↝</span>
+                </div>
+                <div class="concept-tabs" role="tablist" aria-label="Tina's design practice">
+                  <button id="concept-tab-observe" class="concept-tab" type="button" role="tab" aria-selected="true" aria-controls="concept-panel-observe" data-concept-tab="observe">Observe</button>
+                  <button id="concept-tab-listen" class="concept-tab" type="button" role="tab" aria-selected="false" aria-controls="concept-panel-listen" data-concept-tab="listen">Listen</button>
+                  <button id="concept-tab-make" class="concept-tab concept-tab--make" type="button" role="tab" aria-selected="false" aria-controls="concept-panel-make" data-concept-tab="make">Make</button>
+                </div>
+              </div>
+              <div class="concept-definitions" aria-live="polite">
+                <article id="concept-panel-observe" class="concept-panel" role="tabpanel" aria-labelledby="concept-tab-observe" data-concept-panel="observe">
+                  <p><strong>Observe.</strong> I like noticing the little things — how people navigate unfamiliar spaces, what catches their attention, and the moments when they hesitate or do something unexpected.</p>
+                </article>
+                <article id="concept-panel-listen" class="concept-panel" role="tabpanel" aria-labelledby="concept-tab-listen" data-concept-panel="listen">
+                  <p><strong>Listen.</strong> I'm interested in the stories behind those behaviours. Understanding different perspectives often leads me to questions I wouldn't have thought to ask on my own.</p>
+                </article>
+                <article id="concept-panel-make" class="concept-panel" role="tabpanel" aria-labelledby="concept-tab-make" data-concept-panel="make">
+                  <p><strong>Make.</strong> This is where curiosity turns into something tangible. I enjoy experimenting with interactive narratives, playful prototypes and technology that invites people to participate, make choices and discover things for themselves.</p>
+                </article>
+              </div>
+            </section>
 
-        <div class="intro-collage" aria-hidden="true" data-reveal>
-          <span class="collage-shell">◒</span>
-          <span class="collage-type">observe<br>listen<br><em>make</em></span>
-          <span class="collage-arrow">↝</span>
+            <aside class="paper-note">
+              <span aria-hidden="true">✎</span>
+              <p data-profile="note">A little space for curiosity — where small observations grow into playful ideas.</p>
+              <i aria-hidden="true">a note from Tina ↗</i>
+            </aside>
+          </div>
+
+          <figure class="intro-video-card">
+            <span class="intro-video-tape" aria-hidden="true"></span>
+            <div class="intro-video-frame">
+              <video id="intro-video" controls playsinline preload="metadata" poster="assets/images/tina-introduction-poster.jpg" width="720" height="1084" aria-label="Play Tina's introduction video">
+                <source src="assets/media/tina-introduction.m4v" type="video/mp4">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <figcaption><span aria-hidden="true">▶</span> A little hello from Tina</figcaption>
+          </figure>
         </div>
       </div>
       <p class="intro-marquee" aria-hidden="true"><span>CURIOUS MINDS · KIND DETAILS · USEFUL THINGS · CURIOUS MINDS · KIND DETAILS · USEFUL THINGS ·</span></p>
@@ -127,7 +168,7 @@
       <div class="work-heading" data-reveal>
         <p class="eyebrow">Selected explorations</p>
         <h2 id="work-title">Little worlds<br>I’ve <em>imagined</em><span aria-hidden="true">✳</span></h2>
-        <p>Six illustrative concepts, ready to be replaced with your own work. No client work or research outcomes are claimed.</p>
+        <p>Three real case studies and three illustrative concepts, each told as an ocean storybook. The illustrative samples make no claims of client work or completed research.</p>
       </div>
       <div id="project-grid" class="project-grid" aria-live="polite"></div>
     </section>
@@ -138,22 +179,27 @@
         <div class="about-heading" data-reveal>
           <p class="eyebrow">A few fathoms deeper</p>
           <h2 id="about-title">My underwater<br><em>world.</em></h2>
-          <p class="about-kicker">A quiet place for the story, skills, and small curiosities behind the work.</p>
+          <p class="about-kicker">Where audience insight, creative storytelling and technology come together.</p>
         </div>
 
         <div id="about-content" class="about-copy" data-reveal>
-          <p>[Replace with your personal story, in your own words.]</p>
-          <p>[Replace with the way you approach design, collaboration, and learning.]</p>
+          <p>My underwater world is where creative marketing, audience research and design technology meet. I enjoy finding patterns in how people behave, what captures their attention and how a complex idea can become a story people want to follow.</p>
+          <p>I have worked across digital content, SEO, social and community engagement, accessibility research, visual design, interactive technology, physical computing, Arduino/C++ and digital fabrication. This range helps me move between strategy and making, collaborate across creative and technical teams, and carry an idea from insight to delivery.</p>
+          <p>I am especially drawn to work that connects cultures, makes information more approachable and gives people an active role in the experience.</p>
         </div>
 
         <div class="about-lists" data-reveal>
-          <section class="about-list" aria-labelledby="skills-title">
-            <h3 id="skills-title"><span aria-hidden="true">✦</span> Design toolkit</h3>
-            <ul id="skill-list"><li>[Replace with a design skill]</li><li>[Replace with a collaboration skill]</li></ul>
+          <section class="about-list" data-skill-group="creative-marketing" aria-labelledby="creative-marketing-title">
+            <h3 id="creative-marketing-title"><span aria-hidden="true">✦</span> Creative &amp; Marketing</h3>
+            <ul data-skill-items><li>Content Strategy &amp; Copywriting</li><li>Social Media &amp; Community</li><li>SEO &amp; Audience Growth</li><li>Digital Storytelling &amp; Campaign Support</li></ul>
           </section>
-          <section class="about-list" aria-labelledby="interests-title">
-            <h3 id="interests-title"><span aria-hidden="true">◌</span> Beyond the screen</h3>
-            <ul id="interest-list"><li>[Replace with a personal interest]</li></ul>
+          <section class="about-list" data-skill-group="audience-strategy" aria-labelledby="audience-strategy-title">
+            <h3 id="audience-strategy-title"><span aria-hidden="true">◌</span> Audience &amp; Strategy</h3>
+            <ul data-skill-items><li>Audience &amp; Cultural Research</li><li>UX &amp; Usability Testing</li><li>Content Analytics &amp; Insight Reporting</li><li>Cross-cultural Communication</li></ul>
+          </section>
+          <section class="about-list" data-skill-group="design-technology" aria-labelledby="design-technology-title">
+            <h3 id="design-technology-title"><span aria-hidden="true">✳</span> Design &amp; Technology</h3>
+            <ul data-skill-items><li>Figma &amp; Adobe Creative Suite</li><li>Visual Content Production</li><li>Interactive Prototyping, Unity &amp; AR</li><li>Arduino, C++ &amp; Physical Computing</li><li>Digital Fabrication &amp; Prototyping</li><li>Python, SQL &amp; AI Workflows</li></ul>
           </section>
         </div>
 
@@ -190,10 +236,21 @@
         <div class="contact-heading" data-reveal>
           <p class="eyebrow">Send a little signal</p>
           <h2 id="contact-title">Let’s make<br>a <em>ripple.</em></h2>
-          <p id="contact-replacement-note">Contact details are awaiting replacement with your own email, LinkedIn, and résumé.</p>
+          <p id="contact-replacement-note" hidden>Contact details are awaiting replacement with your own email, LinkedIn, and résumé.</p>
         </div>
         <div class="contact-actions" data-reveal>
-          <div id="contact-links" class="contact-links" aria-live="polite"></div>
+          <div id="contact-links" class="contact-links" aria-live="polite">
+            <a class="contact-link" data-contact-kind="email" href="mailto:030224yaoyu@gmail.com">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-detail">030224yaoyu@gmail.com</span>
+              <span class="contact-link-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-link" data-contact-kind="linkedin" href="https://www.linkedin.com/in/yu-yao-221647179/">
+              <span class="contact-link-label">LinkedIn</span>
+              <span class="contact-link-detail">View profile</span>
+              <span class="contact-link-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
           <a class="back-to-surface" href="#home">
             <span class="surface-arrow" aria-hidden="true">↑</span>
             <span>Back to the surface</span>
@@ -206,7 +263,7 @@
 
   <footer class="site-footer">
     <p><span aria-hidden="true">✳</span> A little ocean of ideas</p>
-    <p>Personal details and illustrative content are awaiting replacement.</p>
+    <p>Three real case studies · three clearly labelled illustrative explorations.</p>
     <p aria-hidden="true">The tide will bring us back around.</p>
   </footer>
   <dialog id="storybook-dialog"></dialog>
