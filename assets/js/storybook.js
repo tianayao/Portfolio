@@ -18,6 +18,100 @@ function padded(value) {
   return String(value).padStart(2, '0');
 }
 
+function safeHttpsUrl(value) {
+  if (typeof value !== 'string') return null;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function prototypeCover(doc, media, href) {
+  const link = node(doc, 'a', 'storybook-prototype-cover');
+  link.dataset.prototypeCover = '';
+  link.href = href;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.setAttribute('aria-label', media.alt || `Open ${media.title || 'interactive'} prototype`);
+
+  const copy = node(doc, 'span', 'storybook-prototype-copy');
+  copy.append(
+    node(doc, 'span', 'storybook-prototype-eyebrow', media.eyebrow || 'Interactive prototype'),
+    node(doc, 'strong', 'storybook-prototype-title', media.title || 'Interactive prototype'),
+    node(doc, 'span', 'storybook-prototype-subtitle', media.subtitle || 'Open the interactive product experience.'),
+    node(doc, 'span', 'storybook-prototype-cta', media.cta || 'Open prototype'),
+  );
+
+  const phone = node(doc, 'span', 'storybook-prototype-phone');
+  phone.setAttribute('aria-hidden', 'true');
+  const screen = node(doc, 'span', 'storybook-prototype-screen');
+  screen.append(
+    node(doc, 'span', 'storybook-prototype-status', '9:41'),
+    node(doc, 'span', 'storybook-prototype-kicker', 'BL UNIVERSAL LIBRARY'),
+    node(doc, 'span', 'storybook-prototype-screen-title', 'Stories, together.'),
+    node(doc, 'span', 'storybook-prototype-screen-copy', 'Read · Watch · Follow'),
+    node(doc, 'span', 'storybook-prototype-screen-button', 'Enter as guest'),
+  );
+  phone.append(node(doc, 'span', 'storybook-prototype-notch'), screen);
+  link.append(copy, phone, node(doc, 'span', 'storybook-prototype-spark', '✦'));
+  return link;
+}
+
+function panoramaMedia(doc, media, href) {
+  const wrapper = node(doc, 'div', 'storybook-panorama');
+  const track = node(doc, 'div', 'storybook-panorama-track');
+  track.dataset.panoramaTrack = '';
+  track.tabIndex = 0;
+  track.setAttribute('role', 'group');
+  track.setAttribute('aria-label', `${media.alt || 'Wide project image'}. Drag, scroll, or use Left and Right arrow keys to explore.`);
+
+  const image = node(doc, 'img', 'storybook-panorama-image');
+  image.src = media.src;
+  image.alt = media.alt || '';
+  image.decoding = 'async';
+  image.draggable = false;
+  track.append(image);
+
+  let dragging = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  const release = event => {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove('is-dragging');
+    try { track.releasePointerCapture?.(event.pointerId); } catch { /* Pointer capture may be unavailable in test browsers. */ }
+  };
+  track.addEventListener('pointerdown', event => {
+    if (event.button !== 0) return;
+    dragging = true;
+    startX = event.clientX;
+    startScrollLeft = track.scrollLeft;
+    track.classList.add('is-dragging');
+    try { track.setPointerCapture?.(event.pointerId); } catch { /* Native scrolling remains available. */ }
+  });
+  track.addEventListener('pointermove', event => {
+    if (!dragging) return;
+    event.preventDefault();
+    track.scrollLeft = startScrollLeft + startX - event.clientX;
+  });
+  track.addEventListener('pointerup', release);
+  track.addEventListener('pointercancel', release);
+
+  wrapper.append(track);
+  if (href) {
+    const link = node(doc, 'a', 'storybook-panorama-link', media.cta || 'Open interactive prototype ↗');
+    link.dataset.panoramaLink = '';
+    link.href = href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', media.cta || 'Open interactive prototype in a new tab');
+    wrapper.append(link);
+  }
+  return wrapper;
+}
+
 function focusableItems(root) {
   return [...root.querySelectorAll('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])')]
     .filter(item => !item.hidden && item.getAttribute('aria-hidden') !== 'true');
@@ -86,9 +180,12 @@ function buildReader(dialog) {
   narrative.dataset.storyNarrative = '';
   const insight = node(doc, 'aside', 'storybook-insight');
   insight.dataset.storyInsight = '';
+  const sources = node(doc, 'div', 'storybook-sources');
+  sources.dataset.storySources = '';
+  sources.hidden = true;
   const pageCount = node(doc, 'p', 'storybook-page-count');
   pageCount.dataset.storyPageCount = '';
-  story.append(chapterTag, chapterTitle, narrative, insight, pageCount);
+  story.append(chapterTag, chapterTitle, narrative, insight, sources, pageCount);
 
   const spine = node(doc, 'span', 'storybook-spine');
   spine.setAttribute('aria-hidden', 'true');
@@ -127,6 +224,7 @@ function buildReader(dialog) {
     chapterTitle,
     narrative,
     insight,
+    sources,
     pageCount,
     chapterPrevious,
     chapterNext,
@@ -233,8 +331,17 @@ export function createStorybook({
       ui.media.append(empty);
       ui.caption.textContent = 'No project media supplied yet.';
       ui.count.textContent = '00 / 00';
+    } else if (current.panorama && current.src) {
+      ui.media.append(panoramaMedia(doc, current, safeHttpsUrl(current.href)));
+      ui.caption.textContent = current.caption || current.alt || 'Wide project image';
+      ui.count.textContent = `${padded(index + 1)} / ${padded(total)}`;
+    } else if (safeHttpsUrl(current.href)) {
+      ui.media.append(prototypeCover(doc, current, safeHttpsUrl(current.href)));
+      ui.caption.textContent = current.caption || current.alt || 'Interactive prototype';
+      ui.count.textContent = `${padded(index + 1)} / ${padded(total)}`;
     } else if (current.src) {
       const image = node(doc, 'img', 'storybook-media-image');
+      if (current.fit === 'contain') image.classList.add('storybook-media-image--contain');
       image.src = current.src;
       image.alt = current.alt || '';
       image.decoding = 'async';
@@ -285,6 +392,24 @@ export function createStorybook({
     ui.chapterTitle.textContent = chapter.title || chapter.label || 'Untitled chapter';
     ui.narrative.textContent = chapter.narrative || 'Chapter copy awaiting replacement.';
     ui.insight.textContent = chapter.insight || 'Add a supported insight or reflection here.';
+    ui.sources.replaceChildren();
+    const sources = (Array.isArray(chapter.sources) ? chapter.sources : [])
+      .map(source => ({ label: typeof source?.label === 'string' ? source.label.trim() : '', href: safeHttpsUrl(source?.href) }))
+      .filter(source => source.label && source.href);
+    if (sources.length) {
+      const links = node(doc, 'span', 'storybook-source-links');
+      for (const source of sources) {
+        const link = node(doc, 'a', 'storybook-source-link', source.label);
+        link.href = source.href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        links.append(link);
+      }
+      ui.sources.append(node(doc, 'span', 'storybook-sources-label', 'Desk research sources'), links);
+      ui.sources.hidden = false;
+    } else {
+      ui.sources.hidden = true;
+    }
     const chapterTotal = project.chapters.length;
     ui.pageCount.textContent = `${padded(state.state.chapterIndex + 1)} / ${padded(chapterTotal)}`;
     renderGallery();
@@ -429,6 +554,13 @@ export function createStorybook({
     if (event.key === 'Escape') {
       event.preventDefault();
       close();
+      return;
+    }
+    const panorama = event.target.closest('[data-panorama-track]');
+    if (panorama && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
+      event.preventDefault();
+      const step = Math.max(120, Math.round((panorama.clientWidth || 0) * .42));
+      panorama.scrollLeft += event.key === 'ArrowLeft' ? -step : step;
       return;
     }
     if (event.target.closest('[data-story-gallery]') && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {

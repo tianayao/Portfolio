@@ -1,12 +1,12 @@
 // Composition root: later controllers attach to the semantic mounts in index.html.
 // The HTML remains readable before JavaScript enhancement.
-import { projects, profile, contact } from './content.js?v=2';
+import { projects, profile, contact } from './content.js?v=15';
 import { createStoryState } from './state.js';
 import { createThemeController } from './theme.js';
 import { initNavigation, initOcean } from './ocean.js';
-import { renderProjectCards } from './cards.js?v=4';
-import { createStorybook } from './storybook.js?v=3';
-import { renderAbout, renderContact, initDiscoveries, initBackToSurface, syncPointerMode } from './sections.js?v=3';
+import { renderProjectCards } from './cards.js?v=6';
+import { createStorybook } from './storybook.js?v=8';
+import { renderIntro, renderAbout, renderContact, initIntroConcepts, initDiscoveries, initBackToSurface, syncPointerMode } from './sections.js?v=8';
 
 export const storyState = createStoryState(projects);
 
@@ -14,13 +14,10 @@ let storage;
 try { storage = window.localStorage; } catch { /* Storage access can be disabled. */ }
 export const themeController = createThemeController(storage, document.documentElement, document.querySelectorAll('[data-theme-choice]'));
 
-// textContent keeps editable profile copy separate from trusted interface markup.
-for (const node of document.querySelectorAll('[data-profile]')) {
-  const value = profile[node.dataset.profile];
-  if (typeof value === 'string') node.textContent = value;
-}
 initNavigation();
 initOcean();
+renderIntro(document, profile);
+initIntroConcepts(document);
 renderAbout(document, profile);
 renderContact(document, contact);
 initDiscoveries(document);

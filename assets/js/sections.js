@@ -2,15 +2,90 @@ function nonEmpty(value) {
   return typeof value === 'string' && value.trim() ? value.trim() : null;
 }
 
-function replaceList(doc, selector, values) {
-  const list = doc.querySelector(selector);
-  const items = Array.isArray(values) ? values.map(nonEmpty).filter(Boolean) : [];
-  if (!list || !items.length) return;
-  list.replaceChildren(...items.map(value => {
-    const item = doc.createElement('li');
-    item.textContent = value;
-    return item;
+function skillGroups(data) {
+  if (!Array.isArray(data)) return [];
+  return data.map(group => ({
+    title: nonEmpty(group?.title),
+    icon: nonEmpty(group?.icon) || '✦',
+    items: Array.isArray(group?.items) ? group.items.map(nonEmpty).filter(Boolean) : [],
   }));
+}
+
+function appendSafeEmphasis(doc, parent, value) {
+  const parts = value.split(/(\*\*[^*]+\*\*)/g);
+  for (const part of parts) {
+    const emphasized = part.startsWith('**') && part.endsWith('**') && part.length > 4;
+    if (!emphasized) {
+      parent.append(doc.createTextNode(part));
+      continue;
+    }
+    const strong = doc.createElement('strong');
+    strong.textContent = part.slice(2, -2);
+    parent.append(strong);
+  }
+}
+
+export function renderIntro(doc = document, data = {}) {
+  for (const node of doc.querySelectorAll('[data-profile]')) {
+    const value = nonEmpty(data[node.dataset.profile]);
+    if (value) node.textContent = value;
+  }
+
+  for (const group of doc.querySelectorAll('[data-profile-paragraphs]')) {
+    const values = data[group.dataset.profileParagraphs];
+    const paragraphs = Array.isArray(values) ? values.map(nonEmpty).filter(Boolean) : [];
+    if (!paragraphs.length) continue;
+    group.replaceChildren(...paragraphs.map(value => {
+      const paragraph = doc.createElement('p');
+      appendSafeEmphasis(doc, paragraph, value);
+      return paragraph;
+    }));
+  }
+}
+
+export function initIntroConcepts(doc = document) {
+  const root = doc.querySelector('#intro-concepts');
+  if (!root) return [];
+
+  const panels = new Map([...root.querySelectorAll('[data-concept-panel]')]
+    .map(panel => [panel.dataset.conceptPanel, panel]));
+  const tabs = [...root.querySelectorAll('[data-concept-tab][aria-controls]')]
+    .filter(tab => panels.get(tab.dataset.conceptTab)?.id === tab.getAttribute('aria-controls'));
+  if (!tabs.length) return [];
+
+  const activate = (tab, moveFocus = false) => {
+    const concept = tab.dataset.conceptTab;
+    if (!panels.has(concept)) return false;
+    root.dataset.activeConcept = concept;
+    for (const candidate of tabs) {
+      const selected = candidate === tab;
+      candidate.setAttribute('aria-selected', String(selected));
+      candidate.tabIndex = selected ? 0 : -1;
+      const panel = panels.get(candidate.dataset.conceptTab);
+      if (panel) panel.hidden = !selected;
+    }
+    if (moveFocus) tab.focus();
+    return true;
+  };
+
+  root.classList.add('is-enhanced');
+  const selected = tabs.find(tab => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+  activate(selected);
+
+  for (const [index, tab] of tabs.entries()) {
+    tab.addEventListener('click', () => activate(tab));
+    tab.addEventListener('keydown', event => {
+      let nextIndex = null;
+      if (['ArrowRight', 'ArrowDown'].includes(event.key)) nextIndex = (index + 1) % tabs.length;
+      if (['ArrowLeft', 'ArrowUp'].includes(event.key)) nextIndex = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === 'Home') nextIndex = 0;
+      if (event.key === 'End') nextIndex = tabs.length - 1;
+      if (nextIndex === null) return;
+      event.preventDefault();
+      activate(tabs[nextIndex], true);
+    });
+  }
+  return tabs;
 }
 
 export function renderAbout(doc = document, data = {}) {
@@ -23,8 +98,28 @@ export function renderAbout(doc = document, data = {}) {
       return paragraph;
     }));
   }
-  replaceList(doc, '#skill-list', data.skills);
-  replaceList(doc, '#interest-list', data.interests);
+
+  const mounts = [...doc.querySelectorAll('[data-skill-group]')];
+  const groups = skillGroups(data.skillGroups);
+  const canRenderGroups = groups.length === mounts.length
+    && groups.every(group => group.title && group.items.length);
+  if (!canRenderGroups) return;
+
+  groups.forEach((group, index) => {
+    const mount = mounts[index];
+    const heading = mount.querySelector('h3');
+    const list = mount.querySelector('[data-skill-items]');
+    if (!heading || !list) return;
+    const icon = doc.createElement('span');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = group.icon;
+    heading.replaceChildren(icon, doc.createTextNode(` ${group.title}`));
+    list.replaceChildren(...group.items.map(value => {
+      const item = doc.createElement('li');
+      item.textContent = value;
+      return item;
+    }));
+  });
 }
 
 function safeWebHref(value, base = 'https://portfolio.invalid/') {

@@ -111,6 +111,10 @@ export function renderProjectCards(container, projects, onOpen = () => {}) {
       character.alt = '';
       character.loading = 'lazy';
       character.decoding = 'async';
+      if (shape === 'turtle') {
+        character.style.objectFit = 'contain';
+        character.style.objectPosition = 'center center';
+      }
       silhouette.append(character);
     } else {
       silhouette.innerHTML = getShapeTemplate(shape);
@@ -127,7 +131,7 @@ export function renderProjectCards(container, projects, onOpen = () => {}) {
     visual.append(bubbles);
 
     const copy = element(doc, 'div', 'project-card-copy');
-    const label = element(doc, 'p', 'project-card-label', 'Illustrative concept');
+    const label = element(doc, 'p', 'project-card-label', project.cardLabel || 'Illustrative concept');
     const title = element(doc, 'h3', 'project-card-title', project.title);
     title.id = `project-${project.slug}-title`;
     const type = element(doc, 'p', 'project-card-type', project.type);
@@ -136,7 +140,7 @@ export function renderProjectCards(container, projects, onOpen = () => {}) {
     const action = element(doc, 'button', 'project-open-button');
     action.type = 'button';
     action.dataset.projectOpen = project.slug;
-    action.setAttribute('aria-label', `Open ${project.title} illustrative case study`);
+    action.setAttribute('aria-label', `Open ${project.title} case study`);
     action.append(element(doc, 'span', '', 'Open story'), element(doc, 'span', 'project-open-arrow', '↗'));
 
     action.addEventListener('click', () => {

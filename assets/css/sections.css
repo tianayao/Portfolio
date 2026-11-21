@@ -62,7 +62,7 @@
 .about-copy p:first-of-type { font: italic 400 clamp(1.2rem, 2vw, 1.65rem)/1.45 var(--font-display); }
 .about-copy p:last-child { margin-bottom: 0; color: color-mix(in srgb, var(--ink-on-deep) 78%, transparent); }
 
-.about-lists { grid-area: lists; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.about-lists { grid-area: lists; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; }
 .about-list { min-width: 0; padding: 0; }
 .about-list h3 { margin: 0 0 1rem; color: var(--ink-on-deep); font: 600 .72rem/1.4 var(--font-body); letter-spacing: .12em; text-transform: uppercase; }
 .about-list h3 span { margin-right: .45rem; color: var(--coral-pink); }
