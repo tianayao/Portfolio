@@ -6,7 +6,7 @@ function skillGroups(data) {
   if (!Array.isArray(data)) return [];
   return data.map(group => ({
     title: nonEmpty(group?.title),
-    icon: nonEmpty(group?.icon) || '✦',
+    icon: nonEmpty(group?.icon) || '✦\uFE0E',
     items: Array.isArray(group?.items) ? group.items.map(nonEmpty).filter(Boolean) : [],
   }));
 }
@@ -156,7 +156,7 @@ function contactLink(doc, label, detail, href, kind) {
   const arrow = doc.createElement('span');
   arrow.className = 'contact-link-arrow';
   arrow.setAttribute('aria-hidden', 'true');
-  arrow.textContent = '↗';
+  arrow.textContent = '↗\uFE0E';
   link.append(labelNode, detailNode, arrow);
   return link;
 }

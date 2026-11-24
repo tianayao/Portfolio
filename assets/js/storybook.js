@@ -55,7 +55,7 @@ function prototypeCover(doc, media, href) {
     node(doc, 'span', 'storybook-prototype-screen-button', 'Enter as guest'),
   );
   phone.append(node(doc, 'span', 'storybook-prototype-notch'), screen);
-  link.append(copy, phone, node(doc, 'span', 'storybook-prototype-spark', '✦'));
+  link.append(copy, phone, node(doc, 'span', 'storybook-prototype-spark', '✦\uFE0E'));
   return link;
 }
 
@@ -101,7 +101,7 @@ function panoramaMedia(doc, media, href) {
 
   wrapper.append(track);
   if (href) {
-    const link = node(doc, 'a', 'storybook-panorama-link', media.cta || 'Open interactive prototype ↗');
+    const link = node(doc, 'a', 'storybook-panorama-link', media.cta || 'Open interactive prototype ↗\uFE0E');
     link.dataset.panoramaLink = '';
     link.href = href;
     link.target = '_blank';
@@ -123,7 +123,7 @@ function buildReader(dialog) {
 
   const top = node(doc, 'header', 'storybook-topbar');
   const brand = node(doc, 'p', 'storybook-brand');
-  brand.append(node(doc, 'span', 'storybook-brand-mark', '✳'), node(doc, 'span', '', 'A little sea of stories'));
+  brand.append(node(doc, 'span', 'storybook-brand-mark', '✳\uFE0E'), node(doc, 'span', '', 'A little sea of stories'));
 
   const topControls = node(doc, 'div', 'storybook-top-controls');
   const themes = node(doc, 'div', 'storybook-themes');
@@ -197,12 +197,12 @@ function buildReader(dialog) {
   const navigation = node(doc, 'div', 'storybook-navigation');
   const chapterPrevious = button(doc, 'storybook-page-button', 'Previous chapter');
   chapterPrevious.dataset.chapterPrev = '';
-  chapterPrevious.append(node(doc, 'span', '', '←'), node(doc, 'span', '', 'Previous'), bubbles(doc));
+  chapterPrevious.append(node(doc, 'span', '', '←\uFE0E'), node(doc, 'span', '', 'Previous'), bubbles(doc));
   const diamonds = node(doc, 'div', 'storybook-diamonds');
   diamonds.setAttribute('aria-label', 'Chapter progress');
   const chapterNext = button(doc, 'storybook-page-button', 'Next chapter');
   chapterNext.dataset.chapterNext = '';
-  chapterNext.append(node(doc, 'span', '', 'Next'), node(doc, 'span', '', '→'), bubbles(doc));
+  chapterNext.append(node(doc, 'span', '', 'Next'), node(doc, 'span', '', '→\uFE0E'), bubbles(doc));
   navigation.append(chapterPrevious, diamonds, chapterNext);
 
   const helper = node(doc, 'p', 'storybook-helper', 'Use gallery arrows for images · use the controls below to turn chapters');
@@ -327,7 +327,7 @@ export function createStorybook({
       empty.dataset.galleryEmpty = '';
       empty.setAttribute('role', 'img');
       empty.setAttribute('aria-label', 'No project image supplied yet');
-      empty.append(node(doc, 'span', 'storybook-media-mark', '✦'), node(doc, 'span', '', 'Media awaiting replacement'));
+      empty.append(node(doc, 'span', 'storybook-media-mark', '✦\uFE0E'), node(doc, 'span', '', 'Media awaiting replacement'));
       ui.media.append(empty);
       ui.caption.textContent = 'No project media supplied yet.';
       ui.count.textContent = '00 / 00';
@@ -354,7 +354,7 @@ export function createStorybook({
       placeholder.setAttribute('role', 'img');
       placeholder.setAttribute('aria-label', current.alt || 'Project media awaiting replacement');
       placeholder.append(
-        node(doc, 'span', 'storybook-media-mark', '✦'),
+        node(doc, 'span', 'storybook-media-mark', '✦\uFE0E'),
         node(doc, 'strong', '', 'A place for your image'),
         node(doc, 'span', '', 'Replace this paper placeholder independently'),
       );

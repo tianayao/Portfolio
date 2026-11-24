@@ -19,7 +19,7 @@ body {
 
 button, input, textarea, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
-button { cursor: pointer; color: inherit; }
+button { -webkit-appearance: none; appearance: none; cursor: pointer; color: inherit; }
 button:disabled { cursor: default; }
 a { color: inherit; text-underline-offset: .2em; }
 :focus-visible { outline: var(--focus-width) solid var(--focus); outline-offset: var(--focus-offset); }

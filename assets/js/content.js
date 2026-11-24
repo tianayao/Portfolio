@@ -19,7 +19,7 @@ export const profile = {
   skillGroups: [
     {
       title: 'Creative & Marketing',
-      icon: '✦',
+      icon: '✦\uFE0E',
       items: ['Content Strategy & Copywriting', 'Social Media & Community', 'SEO & Audience Growth', 'Digital Storytelling & Campaign Support'],
     },
     {
@@ -29,7 +29,7 @@ export const profile = {
     },
     {
       title: 'Design & Technology',
-      icon: '✳',
+      icon: '✳\uFE0E',
       items: ['Figma & Adobe Creative Suite', 'Visual Content Production', 'Interactive Prototyping, Unity & AR', 'Arduino, C++ & Physical Computing', 'Digital Fabrication & Prototyping', 'Python, SQL & AI Workflows'],
     },
   ],
@@ -187,7 +187,7 @@ function exoFitsChapters() {
         caption: 'Final interaction panorama · drag sideways to compare the mission menu and three planetary spacewear states.',
         panorama: true,
         href: EXOFITS_FIGMA_URL,
-        cta: 'Open interactive prototype in Figma ↗',
+        cta: 'Open interactive prototype in Figma ↗\uFE0E',
       }],
     },
     {

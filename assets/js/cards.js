@@ -141,7 +141,7 @@ export function renderProjectCards(container, projects, onOpen = () => {}) {
     action.type = 'button';
     action.dataset.projectOpen = project.slug;
     action.setAttribute('aria-label', `Open ${project.title} case study`);
-    action.append(element(doc, 'span', '', 'Open story'), element(doc, 'span', 'project-open-arrow', '↗'));
+    action.append(element(doc, 'span', '', 'Open story'), element(doc, 'span', 'project-open-arrow', '↗\uFE0E'));
 
     action.addEventListener('click', () => {
       cancelCleanup();

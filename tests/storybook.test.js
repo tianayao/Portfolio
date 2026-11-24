@@ -1,6 +1,6 @@
 import { test, assert, equal } from './harness.js';
 import { createStoryState } from '../assets/js/state.js';
-import { createStorybook } from '../assets/js/storybook.js?v=9';
+import { createStorybook } from '../assets/js/storybook.js?v=10';
 
 const pixel = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
 const prototypeUrl = 'https://bl-universal-media-library-portfolio.dessertthebest.chatgpt.site/';
@@ -422,6 +422,27 @@ test('chapter boundaries disable equal-size Previous and Next controls', () => u
   equal(previous.disabled, false);
   equal(next.disabled, true);
   assert(Math.abs(previous.getBoundingClientRect().width - next.getBoundingClientRect().width) < 1);
+}));
+
+// Catches iOS replacing the intended line arrows with coloured emoji buttons.
+test('storybook navigation forces text-style arrow glyphs', () => usingReader({ reduced: true }, ({ reader, dialog, origin }) => {
+  reader.open('test-story', origin);
+  const previousIcon = dialog.querySelector('[data-chapter-prev] > span:first-child');
+  const nextIcon = dialog.querySelector('[data-chapter-next] > span:nth-child(2)');
+  assert(previousIcon.textContent.endsWith('\uFE0E'), 'Previous arrow can fall back to an iOS emoji');
+  assert(nextIcon.textContent.endsWith('\uFE0E'), 'Next arrow can fall back to an iOS emoji');
+}));
+
+// Catches the mobile chapter controls starting below the visible phone screen.
+test('mobile storybook navigation stays inside the visible viewport', () => usingReader({ reduced: true }, async ({ reader, dialog, origin }) => {
+  if (!matchMedia('(max-width: 520px)').matches) return;
+  reader.open('test-story', origin);
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  const navigation = dialog.querySelector('.storybook-navigation');
+  const rect = navigation.getBoundingClientRect();
+  equal(getComputedStyle(navigation).position, 'fixed');
+  assert(rect.top >= 0, `Mobile navigation begins above the viewport at ${rect.top}px`);
+  assert(rect.bottom <= innerHeight, `Mobile navigation ends below the viewport at ${rect.bottom}px`);
 }));
 
 // Catches the state lock being released at the midpoint while the visual page turn is still running.

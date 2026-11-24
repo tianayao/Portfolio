@@ -197,7 +197,7 @@
 .storybook-prototype-title { max-width: 15ch; color: #252c29; font: italic 400 clamp(1.85rem, 3.7vw, 3.25rem)/.94 var(--font-display); letter-spacing: -.05em; }
 .storybook-prototype-subtitle { max-width: 31ch; margin-top: .75rem; color: #5d6b66; font-size: clamp(.68rem, 1.1vw, .86rem); line-height: 1.45; }
 .storybook-prototype-cta { display: inline-flex; align-items: center; gap: .65rem; margin-top: clamp(.8rem, 2vh, 1.15rem); padding: .65rem .9rem; border: 1px solid #3d574c; border-radius: var(--radius-pill); background: #fffaf0; color: #344b42; font-size: .64rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; box-shadow: .18rem .22rem 0 rgb(147 99 96 / 22%); transition: transform .25s ease, color .25s ease, background .25s ease; }
-.storybook-prototype-cta::after { content: "↗"; font-size: .95rem; }
+.storybook-prototype-cta::after { content: "↗\FE0E"; font-size: .95rem; }
 .storybook-prototype-phone { position: relative; justify-self: center; width: min(100%, 11.5rem); aspect-ratio: .52; padding: .55rem; border: .22rem solid #2f3935; border-radius: 2rem; background: #1f2925; box-shadow: 1.1rem 1.45rem 0 rgb(122 80 77 / 16%), 0 1.2rem 2.2rem rgb(47 57 53 / 22%); transform: rotate(4deg); transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease; }
 .storybook-prototype-notch { position: absolute; z-index: 3; top: .5rem; left: 50%; width: 38%; height: .72rem; border-radius: 0 0 .6rem .6rem; background: #1f2925; transform: translateX(-50%); }
 .storybook-prototype-screen { width: 100%; height: 100%; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; padding: 1.15rem .8rem .85rem; border-radius: 1.38rem; background: linear-gradient(180deg, #ede7d9 0 45%, #cadbcf 45% 100%); color: #28322e; }
@@ -229,7 +229,7 @@
 .storybook-chapter-title { margin: clamp(1.25rem, 3vh, 2rem) 0 clamp(1.25rem, 3vh, 2rem); color: #1d242c; font: italic 400 clamp(2.15rem, 4vw, 3.8rem)/1.03 var(--font-display); letter-spacing: -.055em; }
 .storybook-narrative { margin: 0; color: var(--reader-copy); font-size: clamp(.88rem, 1.35vw, 1.05rem); line-height: 1.8; }
 .storybook-insight { align-self: flex-start; margin-top: clamp(1.4rem, 3vh, 2.25rem); padding: .9rem 1.05rem; border-radius: .45rem; background: var(--reader-note); color: #996a80; font-size: .73rem; line-height: 1.55; }
-.storybook-insight::before { content: "✳ "; }
+.storybook-insight::before { content: "✳\FE0E  "; }
 .storybook-sources { align-self: stretch; margin-top: .65rem; font-size: .68rem; line-height: 1.45; }
 .storybook-sources-label { display: block; margin-bottom: .25rem; color: var(--reader-copy); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .storybook-source-links { display: flex; flex-wrap: wrap; gap: .28rem .55rem; }
@@ -281,7 +281,7 @@
 }
 
 @media (max-width: 520px) {
-  .storybook-shell { padding-bottom: 2.2rem; }
+  .storybook-shell { padding-bottom: calc(8.5rem + env(safe-area-inset-bottom)); overflow: visible; }
   .storybook-close { width: 2.7rem; }
   .storybook-book { grid-template-columns: 1fr; border-radius: 1rem; }
   .storybook-book::before { inset: .55rem -.45rem -.65rem .45rem; }
@@ -307,8 +307,8 @@
   .storybook-chapter-title { margin-block: 1rem; font-size: clamp(2rem, 10vw, 3rem); }
   .storybook-narrative { font-size: .84rem; }
   .storybook-page-turn { inset: 0; border-radius: 1rem; }
-  .storybook-navigation { grid-template-columns: 1fr 1fr; grid-template-areas: "previous next" "diamonds diamonds"; row-gap: .8rem; }
-  .storybook-page-button { width: 100%; min-width: 0; }
+  .storybook-dialog .storybook-navigation { position: fixed; z-index: 40; left: .6rem; right: .6rem; bottom: max(.55rem, env(safe-area-inset-bottom)); width: auto; margin: 0; padding: .52rem .55rem .42rem; grid-template-columns: 1fr 1fr; grid-template-areas: "previous next" "diamonds diamonds"; row-gap: .3rem; border: 1px solid color-mix(in srgb, var(--ink-on-deep) 20%, transparent); border-radius: 1.2rem; background: color-mix(in srgb, var(--deep-water) 90%, transparent); box-shadow: 0 .75rem 2.3rem rgb(2 19 31 / 32%); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  .storybook-page-button { width: 100%; min-width: 0; min-height: 3.25rem; }
   .storybook-page-button:first-child { grid-area: previous; }
   .storybook-page-button:last-child { grid-area: next; }
   .storybook-diamonds { grid-area: diamonds; }

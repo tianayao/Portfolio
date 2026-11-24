@@ -1,6 +1,6 @@
 import { test, assert, equal } from './harness.js';
-import { projects } from '../assets/js/content.js';
-import { getShapeTemplate, renderProjectCards } from '../assets/js/cards.js?v=2';
+import { projects } from '../assets/js/content.js?v=2';
+import { getShapeTemplate, renderProjectCards } from '../assets/js/cards.js?v=7';
 
 const shapes = ['clam', 'starfish', 'conch', 'whale', 'turtle', 'jellyfish'];
 const wait = milliseconds => new Promise(resolve => window.setTimeout(resolve, milliseconds));
@@ -23,8 +23,8 @@ test('all six ocean species provide distinct SVG silhouettes', () => {
   equal(getShapeTemplate('unknown'), '');
 });
 
-// Catches cards that lose their editable content, illustrative disclosure, or independent media layer.
-test('project cards expose complete sample content and replaceable media slots', () => {
+// Catches cards that mislabel a real case study as illustrative or lose their independent media layer.
+test('project cards expose each project disclosure and complete content', () => {
   const { container } = fixture();
   renderProjectCards(container, projects, () => {});
   const cards = [...container.querySelectorAll('[data-project-card]')];
@@ -32,7 +32,7 @@ test('project cards expose complete sample content and replaceable media slots',
   cards.forEach((card, index) => {
     const project = projects[index];
     const text = card.textContent;
-    assert(text.includes('Illustrative concept'));
+    equal(card.querySelector('.project-card-label').textContent, project.cardLabel);
     assert(text.includes(project.title));
     assert(text.includes(project.type));
     assert(text.includes(project.summary));
@@ -43,7 +43,8 @@ test('project cards expose complete sample content and replaceable media slots',
     const action = card.querySelector('button[data-project-open]');
     assert(action, `${project.title} is missing a native open action`);
     equal(action.type, 'button');
-    assert(action.getAttribute('aria-label').includes(project.title));
+    equal(action.getAttribute('aria-label'), `Open ${project.title} case study`);
+    assert(action.querySelector('.project-open-arrow').textContent.endsWith('\uFE0E'), `${project.title} action icon can fall back to an iOS emoji`);
     assert(card.querySelectorAll('[data-card-bubble]').length <= 6);
   });
 });
@@ -70,18 +71,42 @@ async function withRenderedMobileCards(run) {
 
 // Catches mobile buttons drifting into the tapered bubble edge.
 test('mobile card actions keep a safe inset from both bubble edges', async () => {
+  if (!matchMedia('(max-width: 680px)').matches) return;
   await withRenderedMobileCards(container => {
     for (const card of container.querySelectorAll('[data-project-card]')) {
       const copy = card.querySelector('.project-card-copy').getBoundingClientRect();
       const action = card.querySelector('.project-open-button').getBoundingClientRect();
       assert(action.left - copy.left >= 32, `${card.dataset.projectCard} action is too close to the left bubble edge`);
       assert(copy.right - action.right >= 32, `${card.dataset.projectCard} action is too close to the right bubble edge`);
+      assert(action.width >= 160 && action.width <= 180, `${card.dataset.projectCard} action is not the compact shared width`);
     }
   });
 });
 
+// Catches one character canvas becoming visually smaller or larger than the other five.
+test('all six character canvases use one rendered scale', async () => {
+  await withRenderedMobileCards(container => {
+    const scales = [...container.querySelectorAll('.project-card-character-art')].map(image => {
+      const matrix = getComputedStyle(image).transform.match(/matrix\(([^)]+)\)/)?.[1].split(',').map(Number);
+      return matrix ? Math.hypot(matrix[0], matrix[1]) : 1;
+    });
+    assert(Math.max(...scales) - Math.min(...scales) <= .01, `Expected one shared character scale, received ${scales.join(', ')}`);
+  });
+});
+
+test('the turtle character enforces complete centred media independent of cached card CSS', () => {
+  const { container } = fixture();
+  renderProjectCards(container, projects, () => {});
+  const turtle = container.querySelector('[data-project-card="slow-table"] .project-card-character-art');
+  assert(turtle, 'Slow Table turtle artwork is missing');
+  equal(turtle.style.objectFit, 'contain');
+  equal(turtle.style.objectPosition, 'center center');
+  assert(turtle.getAttribute('src').includes('work-slow-table-turtle.png?v=2'));
+});
+
 // Catches the tall Drift Space artwork escaping its visual frame and being obscured by the copy card.
 test('the sixth portrait stays inside its visual frame and its copy clears the artwork', async () => {
+  if (!matchMedia('(max-width: 680px)').matches) return;
   await withRenderedMobileCards(container => {
     const sixth = container.querySelector('[data-project-card="drift-space"]');
     const visual = sixth.querySelector('.project-card-visual').getBoundingClientRect();
