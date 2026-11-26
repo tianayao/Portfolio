@@ -5,7 +5,6 @@ export const profile = {
   intro: [
     "Originally from China and now based in London, I work across creative marketing, audience research and experience design. I'm curious about how people discover, understand and respond to stories across cultures and platforms.",
     'With a background in **Interactive Media and Design Informatics**, I bring together content strategy, visual storytelling and emerging technology to turn audience insight into clear, engaging digital experiences.',
-    'My experience spans SEO and content operations, social and community communication, UX research, interactive prototyping, physical computing and robotic installations. I enjoy following an idea from early observation through making, testing and delivery.',
   ],
   philosophy: [
     'To me, good creative work begins with understanding the audience: what they notice, what they care about and what helps an idea stay with them.',

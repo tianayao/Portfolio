@@ -210,7 +210,7 @@ test('portfolio content distinguishes four factual case studies from two illustr
   }
   equal(profile.displayName, 'Tina!');
   equal(profile.role, 'Curious about people. Playful with technology.');
-  equal(profile.intro.length, 3);
+  equal(profile.intro.length, 2);
   equal(profile.philosophy.length, 2);
   assert(profile.intro.some(paragraph => paragraph.includes('**Interactive Media and Design Informatics**')));
   assert(profile.intro[0].includes('creative marketing, audience research and experience design'));
