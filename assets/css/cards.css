@@ -82,6 +82,7 @@
 .project-card--starfish { --character-x: 2%; --character-y: -1%; --bubble-paper: #edf6ed; --bubble-radius: 56% 44% 51% 49% / 18% 25% 75% 82%; }
 .project-card--conch { --character-y: 1%; --bubble-paper: #f2eafa; --bubble-radius: 44% 56% 58% 42% / 24% 18% 82% 76%; }
 .project-card--whale { --character-x: 1%; --character-y: -1%; --bubble-paper: #e8f1f7; --bubble-radius: 52% 48% 42% 58% / 19% 26% 74% 81%; }
+.project-card[data-project-card="cover-me"] { --bubble-radius: 28% 24% 30% 26% / 10% 13% 15% 12%; }
 .project-card--turtle { --character-y: 1%; --bubble-paper: #e9f4eb; --bubble-radius: 46% 54% 55% 45% / 27% 18% 82% 73%; }
 .project-card--turtle .project-card-silhouette { inset: 3% 2% 5%; }
 .project-card--turtle .project-card-character-art { object-fit: contain; object-position: center center; }

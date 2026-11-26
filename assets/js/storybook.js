@@ -335,6 +335,20 @@ export function createStorybook({
       ui.media.append(panoramaMedia(doc, current, safeHttpsUrl(current.href)));
       ui.caption.textContent = current.caption || current.alt || 'Wide project image';
       ui.count.textContent = `${padded(index + 1)} / ${padded(total)}`;
+    } else if (current.src && safeHttpsUrl(current.href)) {
+      const link = node(doc, 'a', 'storybook-image-link');
+      link.href = safeHttpsUrl(current.href);
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', current.cta || current.alt || 'Open project media');
+      const image = node(doc, 'img', 'storybook-media-image');
+      if (current.fit === 'contain') image.classList.add('storybook-media-image--contain');
+      image.src = current.src;
+      image.alt = current.alt || '';
+      link.append(image, node(doc, 'span', 'storybook-image-link-label', current.cta || 'Open project media'));
+      ui.media.append(link);
+      ui.caption.textContent = current.caption || current.alt || 'Project media';
+      ui.count.textContent = `${padded(index + 1)} / ${padded(total)}`;
     } else if (safeHttpsUrl(current.href)) {
       ui.media.append(prototypeCover(doc, current, safeHttpsUrl(current.href)));
       ui.caption.textContent = current.caption || current.alt || 'Interactive prototype';

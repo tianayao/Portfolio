@@ -50,13 +50,20 @@ export const chapterLabels = ['Overview', 'Problem', 'Research', 'Ideation', 'So
 
 const BL_PROTOTYPE_URL = 'https://bl-universal-media-library-portfolio.dessertthebest.chatgpt.site/';
 const EXOFITS_FIGMA_URL = 'https://www.figma.com/design/hgR9uTrAHUs9RrchdEiw8D/exhibtion?node-id=0-1&t=eJpDqFuzQuz0Gr5B-1';
+const COVER_ME_VIDEO_URL = 'https://drive.google.com/file/d/1baoJ6sk4TJlJyhCzGvKaIX8ATrrdWHrc/view?usp=sharing';
+const coverMeMedia = {
+  src: 'assets/images/cover-me/cover-me-gameplay.png',
+  alt: 'Cover Me gameplay with an umbrella above a moving character in a rainy Unity scene',
+  caption: 'Cover Me · project walkthrough. Select the image to watch the video on Google Drive.',
+  fit: 'contain', href: COVER_ME_VIDEO_URL, cta: 'Watch project walkthrough',
+};
 
 // Work records include factual case studies and clearly labelled illustrative concepts.
 const samples = [
   { slug: 'snuffmouth', title: 'SnuffMouth', cardShape: 'clam', accent: '#996448', illustrative: false, cardLabel: 'Design robotics case study', type: 'Independent project · physical computing & interaction design', summary: 'A robotic installation that turns second-hand smoke into immediate physical, visual and sonic feedback.' },
   { slug: 'exofits', title: 'Exo-Fits', cardShape: 'starfish', accent: '#9b5545', illustrative: false, cardLabel: 'Interactive AR installation case study', type: 'Independent project · AR, body tracking & exhibition design', summary: 'An immersive AR spacewear experience that turns extreme planetary conditions into an embodied exhibition encounter.' },
   { slug: 'bl-universal-media-library', title: 'BL Universal Media Library', cardShape: 'conch', accent: '#775c86', illustrative: false, cardLabel: 'Product design case study', type: 'Independent product design · mobile app concept', summary: 'A calm discovery and tracking layer for BL stories across countries, media formats, and official platforms.', prototypeUrl: BL_PROTOTYPE_URL },
-  { slug: 'blue-hour', title: 'Blue Hour', cardShape: 'whale', accent: '#416c83', type: 'Illustrative · planning concept', summary: 'An illustrative exploration of planning a more spacious day.', audience: 'people making room for a few meaningful daily tasks', question: 'How might planning make capacity visible before adding more tasks?', direction: 'a simple day view that includes breaks alongside commitments', caution: 'how different schedules and care responsibilities affect planning' },
+  { slug: 'cover-me', title: 'Cover Me', cardShape: 'whale', accent: '#416c83', illustrative: false, cardLabel: 'Motion capture & game design case study', type: 'Group project · research, data visualisation & Unity', summary: 'Turning motion capture trajectories into a playful challenge: can you predict the space a moving body will need?' },
   { slug: 'slow-table', title: 'Slow Table', cardShape: 'turtle', accent: '#496d59', type: 'Illustrative · food planning concept', summary: 'An illustrative exploration of flexible meal planning.', audience: 'people planning meals around what is already available', question: 'How might a meal plan adapt when ingredients or plans change?', direction: 'ingredient-led suggestions with clear substitutions and a reusable list', caution: 'dietary requirements, ingredient availability, and the clarity of substitutions' },
   { slug: 'drift-space', title: 'Drift Space', cardShape: 'jellyfish', accent: '#856385', type: 'Illustrative · collaboration concept', summary: 'An illustrative exploration of sharing early creative ideas.', audience: 'small teams sharing work before it feels finished', question: 'How might a shared space make the kind of feedback an idea needs clear?', direction: 'idea notes paired with a specific feedback request and visible context', caution: 'whether feedback requests support participation across different working styles' },
 ];
@@ -90,6 +97,82 @@ function chaptersFor(sample) {
       caption: `Illustrative placeholder · ${label} ${image + 1}. Replace with your own image and caption.`,
     })),
   }));
+}
+
+function coverMeChapters() {
+  const trajectories = {
+    src: 'assets/images/cover-me/cover-me-trajectories.png', fit: 'contain',
+    alt: 'Blue foot trajectories in three dimensions with a fitted optimal plane',
+    caption: 'Trajectory analysis · fitting a plane to the foot positions revealed a tilt in the recorded movement.',
+  };
+  const hulls = {
+    src: 'assets/images/cover-me/cover-me-body-volumes.png', fit: 'contain',
+    alt: 'Four motion capture skeleton frames enclosed by purple convex hulls with volume measurements',
+    caption: 'Spatial occupancy · convex hulls compare the enclosing volume of four poses. These are geometric envelopes, not anatomical body volumes.',
+  };
+  const chapters = [
+    {
+      title: 'Overview: Predicting the space a body needs',
+      narrative: 'Cover Me is a group project that translates motion capture data supplied by RETìníZE into a playable exploration of spatial perception. In the Unity prototype, players position and resize an umbrella to keep a moving friend dry. I contributed concept and theoretical research, motion trajectory analysis and animation, and part of the Unity rendering. The wider team developed the game systems and brought the experience together.',
+      insight: 'My contribution · Concept and theory research · Motion capture trajectory analysis and animation · Selected Unity rendering. Delivered scope · One playable scenario and a project walkthrough.',
+      images: [{ ...coverMeMedia }],
+    },
+    {
+      title: 'Problem: Seeing movement is not the same as predicting it',
+      narrative: 'A body changes its position and the space it occupies as it moves. Viewed from another angle, the same gesture can appear to have a different reach or scale. Our design question was how to make this gap between a visual estimate and recorded movement understandable through interaction. We chose an everyday situation: helping a friend stay dry, while anticipating where their next movement will take them.',
+      insight: 'Design question · How might an everyday act of helping someone make the spatial demands of movement visible?',
+      images: [{ ...coverMeMedia }],
+    },
+    {
+      title: 'Research: From spatial perception to a playable question',
+      narrative: 'My conceptual research connected spatial perception, proprioception and action-based perception with the idea of a “body script”: how movement unfolds through three-dimensional space. The report also draws on game-based learning to frame a cycle of prediction, action and feedback. These ideas informed the interaction; they do not establish that our prototype improves spatial ability or working memory. Although VR motivated the research, the delivered prototype is a Windows desktop game.',
+      insight: 'Research to design · Let players inspect a movement, make a spatial prediction, then compare it with the recorded motion. Learning outcomes remain to be evaluated.',
+      sources: [
+        { label: 'Shi & Shih · Game-Based Learning Design Model (2015)', href: 'https://doi.org/10.1155/2015/549684' },
+        { label: 'Azarby & Rice · Spatial Perception in Virtual Environments (2023)', href: 'https://doi.org/10.3390/buildings13010160' },
+        { label: 'Witt · Action’s Effect on Perception (2011)', href: 'https://doi.org/10.1177/0963721411408770' },
+      ],
+      images: [{
+        src: 'assets/images/cover-me/cover-me-research-blender.png', fit: 'contain',
+        alt: 'Blender armature beside a Python script calculating joint offsets relative to the root bone',
+        caption: 'Research workflow · inspecting the skeletal hierarchy and calculating joint offsets in Blender.',
+      }],
+    },
+    {
+      title: 'Data analysis: Reading trajectories and spatial occupancy',
+      narrative: 'The supplied dataset recorded 28 joints in a hierarchy rooted at the hips. The team cleaned quaternion and position data in Python and visualised the animation in Blender. My work focused on analysing and animating motion trajectories. Foot positions revealed an inclined movement plane; fitting a plane informed a rotation correction in Blender. Alongside these paths, convex hulls described the space enclosed by each pose. Together, trajectories and enclosing volumes made the body’s changing spatial demands visible and informed the game’s prediction-and-feedback loop.',
+      insight: 'Two complementary views · Trajectories show where joints move over time; convex hulls describe the enclosing space of a pose. The displayed volumes are relative dataset measurements, with no physical units established here.',
+      images: [trajectories, hulls],
+    },
+    {
+      title: 'Solution: An umbrella becomes a spatial decision',
+      narrative: 'Players preview the character’s motion up to three times, then move and scale an umbrella and adjust their viewing angle before committing. A larger umbrella offers more coverage but consumes more stamina; insufficient coverage reduces the character’s health. This trade-off makes the prediction matter. The result view brings joint trajectories and animated convex hulls back into the experience so players can compare their estimate with the movement. I contributed the analysis animations and selected Unity rendering within the team’s Blender-to-Unity workflow.',
+      insight: 'Interaction loop · Preview the motion → predict position and reach → place the umbrella → inspect the visual feedback. One scenario was completed within the project timeframe.',
+      images: [
+        {
+          src: 'assets/images/cover-me/cover-me-solution-preview.png', fit: 'contain',
+          alt: 'Cover Me Unity gameplay with an umbrella, movement preview panel and placement controls',
+          caption: 'Gameplay · preview the movement, then position and scale the umbrella before selecting Let’s Go.',
+        },
+        {
+          src: 'assets/images/cover-me/cover-me-solution-feedback.png', fit: 'contain',
+          alt: 'Cover Me result screen showing a star rating, coloured joint trajectories and a convex hull view',
+          caption: 'Feedback · compare the prediction with joint trajectories and the space enclosed by the moving body.',
+        },
+      ],
+    },
+    {
+      title: 'Reflection: Making the data part of the experience',
+      narrative: 'The most useful connection was between the analysis and the interaction: trajectories and spatial envelopes became both design material and feedback for the player. The project also showed why an engaging demonstration needs an evaluation plan. We produced one scenario, but did not establish a measured improvement in spatial perception or memory. I would next test whether players can interpret the two visualisations and explain the difference between their prediction and the recorded motion. Additional scenarios and a VR version remain future directions.',
+      insight: 'What I take forward · Connect theoretical framing to a concrete interaction, make data transformations legible, and distinguish an intended learning experience from a demonstrated learning effect.',
+      images: [{
+        src: 'assets/images/cover-me/cover-me-reflection-title.png', fit: 'contain',
+        alt: 'Cover Me Body Script title screen with an illustrated character and a play button',
+        caption: 'Cover Me · Body Script title screen and illustrated visual direction.',
+      }],
+    },
+  ];
+  return chapters.map((chapter, index) => ({ number: index + 1, label: chapterLabels[index], ...chapter }));
 }
 
 function snuffMouthChapters() {
@@ -353,13 +436,13 @@ export const projects = samples.map(sample => ({
       snuffmouth: 'assets/images/work-tide-notes-porcupinefish.png',
       exofits: 'assets/images/work-little-paths-tuna.png',
       'bl-universal-media-library': 'assets/images/work-shell-library-hermit-crab.png',
-      'blue-hour': 'assets/images/work-blue-hour-whale.png',
+      'cover-me': 'assets/images/work-blue-hour-whale.png',
       'slow-table': 'assets/images/work-slow-table-turtle.png?v=2',
       'drift-space': 'assets/images/work-drift-space-seal.png',
     }[sample.slug],
     alt: `Watercolor ocean character for ${sample.title}`,
   },
-  coverMedia: sample.slug === 'exofits' ? {
+  coverMedia: sample.slug === 'cover-me' ? { ...coverMeMedia } : sample.slug === 'exofits' ? {
     src: 'assets/images/exofits/exofits-overview-panorama.png',
     alt: 'Exo-Fits mission menu and planetary AR spacewear interfaces',
     caption: 'Interactive AR installation · final interface overview.',
@@ -376,5 +459,5 @@ export const projects = samples.map(sample => ({
     alt: `Illustrative ${sample.title} project cover awaiting replacement`,
     caption: 'Illustrative placeholder · replace with your own project cover.',
   },
-  chapters: sample.slug === 'snuffmouth' ? snuffMouthChapters() : sample.slug === 'exofits' ? exoFitsChapters() : sample.prototypeUrl ? caseStudyChapters(sample) : chaptersFor(sample),
+  chapters: sample.slug === 'cover-me' ? coverMeChapters() : sample.slug === 'snuffmouth' ? snuffMouthChapters() : sample.slug === 'exofits' ? exoFitsChapters() : sample.prototypeUrl ? caseStudyChapters(sample) : chaptersFor(sample),
 }));

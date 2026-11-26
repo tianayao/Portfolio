@@ -69,13 +69,13 @@ class StaticShellTests(unittest.TestCase):
 
     def test_public_status_copy_matches_the_completed_profile(self):
         source = (ROOT / 'index.html').read_text()
-        self.assertIn('Three real case studies · three clearly labelled illustrative explorations.', source)
-        self.assertIn('Three real case studies and three illustrative concepts', source)
+        self.assertIn('Four real case studies · two clearly labelled illustrative explorations.', source)
+        self.assertIn('Four real case studies and two illustrative concepts', source)
         self.assertNotIn('One product-design case study and five illustrative concepts', source)
         self.assertNotIn('Personal details and five illustrative concepts are awaiting replacement.', source)
 
         readme = (ROOT / 'README.md').read_text()
-        self.assertIn('Three real case studies and three explicitly illustrative concepts', readme)
+        self.assertIn('Four real case studies and two explicitly illustrative concepts', readme)
         self.assertIn('profile.skillGroups', readme)
         self.assertNotIn('profile.skills', readme)
         self.assertNotIn('profile.interests', readme)
@@ -273,14 +273,14 @@ class StaticShellTests(unittest.TestCase):
         content = (ROOT / 'assets/js/content.js').read_text()
         self.assertEqual(content.count("slug: '"), 6)
         self.assertIn('illustrative: sample.illustrative !== false', content)
-        self.assertEqual(content.count('illustrative: false'), 3)
+        self.assertEqual(content.count('illustrative: false'), 4)
         self.assertIn('Product design case study', content)
         self.assertIn('https://bl-universal-media-library-portfolio.dessertthebest.chatgpt.site/', content)
         for phrase in ['does not describe delivered work', 'No interviews, observations, or findings are claimed',
                        'No impact metrics are claimed']:
             self.assertIn(phrase, content)
         shell = (ROOT / 'index.html').read_text()
-        self.assertIn('Three real case studies and three illustrative concepts', shell)
+        self.assertIn('Four real case studies and two illustrative concepts', shell)
         self.assertNotIn('One product-design case study and five illustrative concepts', shell)
         self.assertNotIn('Six illustrative concepts', shell)
 
