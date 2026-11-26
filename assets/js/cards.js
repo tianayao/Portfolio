@@ -97,6 +97,7 @@ export function renderProjectCards(container, projects, onOpen = () => {}) {
     const shape = getShapeTemplate(project.cardShape) ? project.cardShape : 'clam';
     const card = element(doc, 'article', `project-card project-card--${shape}`);
     card.dataset.projectCard = project.slug;
+    if (project.locked) card.classList.add('project-card--locked');
     card.style.setProperty('--card-accent', safeAccent(project.accent));
 
     const visual = element(doc, 'div', 'project-card-visual');
@@ -140,10 +141,12 @@ export function renderProjectCards(container, projects, onOpen = () => {}) {
     const action = element(doc, 'button', 'project-open-button');
     action.type = 'button';
     action.dataset.projectOpen = project.slug;
-    action.setAttribute('aria-label', `Open ${project.title} case study`);
-    action.append(element(doc, 'span', '', 'Open story'), element(doc, 'span', 'project-open-arrow', '↗\uFE0E'));
+    action.disabled = Boolean(project.locked);
+    action.setAttribute('aria-label', project.locked ? `Work ${String(index + 1).padStart(2, '0')} coming soon` : `Open ${project.title} case study`);
+    action.append(element(doc, 'span', '', project.locked ? 'Coming soon' : 'Open story'), element(doc, 'span', 'project-open-arrow', project.locked ? '◇' : '↗\uFE0E'));
 
     action.addEventListener('click', () => {
+      if (project.locked) return;
       cancelCleanup();
       resetOpening(container);
       card.classList.add('is-focal');

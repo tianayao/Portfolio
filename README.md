@@ -2,7 +2,7 @@
 
 A dependency-free, responsive product-design portfolio with a continuous ocean narrative and an in-page Storybook case-study reader. It is built with semantic HTML, focused CSS layers, and browser-native ES modules, so it can be served directly from the repository root on GitHub Pages.
 
-Four real case studies and two explicitly illustrative concepts are included. Cover Me is a group motion capture project; Tina's contributions are concept/theory research, trajectory analysis and animation, and selected Unity rendering. The concepts are placeholders for structure and interaction—not claims of delivered client work, completed research, or measured outcomes.
+Four real case studies and two locked coming-soon slots are included. Cover Me is a group motion capture project; Tina's contributions are concept/theory research, trajectory analysis and animation, and selected Unity rendering. Work 05 and 06 retain their ocean characters but hide the former illustrative copy and disable their storybook actions until real projects are selected.
 
 ## Local preview
 

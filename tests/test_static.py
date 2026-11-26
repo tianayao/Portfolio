@@ -69,13 +69,13 @@ class StaticShellTests(unittest.TestCase):
 
     def test_public_status_copy_matches_the_completed_profile(self):
         source = (ROOT / 'index.html').read_text()
-        self.assertIn('Four real case studies · two clearly labelled illustrative explorations.', source)
-        self.assertIn('Four real case studies and two illustrative concepts', source)
+        self.assertIn('Four real case studies · two stories waiting to be unlocked.', source)
+        self.assertIn('Four real case studies and two stories waiting to be unlocked', source)
         self.assertNotIn('One product-design case study and five illustrative concepts', source)
         self.assertNotIn('Personal details and five illustrative concepts are awaiting replacement.', source)
 
         readme = (ROOT / 'README.md').read_text()
-        self.assertIn('Four real case studies and two explicitly illustrative concepts', readme)
+        self.assertIn('Four real case studies and two locked coming-soon slots', readme)
         self.assertIn('profile.skillGroups', readme)
         self.assertNotIn('profile.skills', readme)
         self.assertNotIn('profile.interests', readme)
@@ -280,7 +280,7 @@ class StaticShellTests(unittest.TestCase):
                        'No impact metrics are claimed']:
             self.assertIn(phrase, content)
         shell = (ROOT / 'index.html').read_text()
-        self.assertIn('Four real case studies and two illustrative concepts', shell)
+        self.assertIn('Four real case studies and two stories waiting to be unlocked', shell)
         self.assertNotIn('One product-design case study and five illustrative concepts', shell)
         self.assertNotIn('Six illustrative concepts', shell)
 

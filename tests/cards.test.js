@@ -43,8 +43,9 @@ test('project cards expose each project disclosure and complete content', () => 
     const action = card.querySelector('button[data-project-open]');
     assert(action, `${project.title} is missing a native open action`);
     equal(action.type, 'button');
-    equal(action.getAttribute('aria-label'), `Open ${project.title} case study`);
-    assert(action.querySelector('.project-open-arrow').textContent.endsWith('\uFE0E'), `${project.title} action icon can fall back to an iOS emoji`);
+    equal(action.disabled, Boolean(project.locked));
+    equal(action.getAttribute('aria-label'), project.locked ? `Work ${String(index + 1).padStart(2, '0')} coming soon` : `Open ${project.title} case study`);
+    if (!project.locked) assert(action.querySelector('.project-open-arrow').textContent.endsWith('\uFE0E'), `${project.title} action icon can fall back to an iOS emoji`);
     assert(card.querySelectorAll('[data-card-bubble]').length <= 6);
   });
 });

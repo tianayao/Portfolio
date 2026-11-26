@@ -122,6 +122,9 @@
 .project-card-note p { margin: 0; font: 500 .92rem/1.55 var(--font-body); }
 .project-open-button { position: relative; z-index: 2; display: inline-flex; align-self: center; align-items: center; justify-content: space-between; gap: 1.35rem; width: min(100%, 11rem); min-width: 9.75rem; min-height: 2.9rem; margin: auto auto 1rem; padding: .65rem .7rem .65rem .9rem; border: 1px solid color-mix(in srgb, var(--card-accent) 60%, var(--paper-border)); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--bubble-paper, var(--paper)) 88%, white); color: color-mix(in srgb, var(--card-accent) 82%, var(--paper-ink)); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; transition: color .25s ease, background .25s ease, transform .25s ease; }
 .project-open-arrow { display: grid; place-items: center; width: 1.7rem; aspect-ratio: 1; border-radius: 50%; background: var(--card-accent); color: var(--paper); font-size: 1rem; transition: transform .28s ease; }
+.project-card--locked .project-open-button:disabled { opacity: .8; cursor: default; border-style: dashed; transform: none; }
+.project-card--locked .project-card-note { border-left: 0; background: transparent; text-align: center; }
+.project-card--locked .project-card-title { font-size: clamp(2rem, 3.5vw, 3.3rem); }
 .project-open-button:hover, .project-open-button:focus-visible { background: var(--card-accent); color: var(--paper); transform: translateY(-2px); }
 .project-open-button:hover .project-open-arrow, .project-open-button:focus-visible .project-open-arrow { background: var(--paper); color: var(--card-accent); transform: rotate(45deg); }
 

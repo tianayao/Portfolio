@@ -205,7 +205,9 @@ test('portfolio content distinguishes four factual case studies from two illustr
     });
   }
   for (const project of projects.filter(project => project.illustrative)) {
-    equal(project.cardLabel, 'Illustrative concept');
+    equal(project.cardLabel, 'Coming soon');
+    equal(project.locked, true);
+    equal(createStoryState(projects).openProject(project.slug), false);
     assert(project.coverMedia.caption.includes('Illustrative'));
   }
   equal(profile.displayName, 'Tina!');
@@ -214,7 +216,7 @@ test('portfolio content distinguishes four factual case studies from two illustr
   equal(profile.philosophy.length, 2);
   assert(profile.intro.some(paragraph => paragraph.includes('**Interactive Media and Design Informatics**')));
   assert(profile.intro[0].includes('creative marketing, audience research and experience design'));
-  assert(profile.intro[2].includes('SEO and content operations'));
+  assert(!profile.intro.some(paragraph => paragraph.startsWith('My experience spans SEO')));
   assert(profile.philosophy.some(paragraph => paragraph.includes('**empathy, cultural curiosity and experimentation**')));
   equal(profile.about.length, 3);
   assert(profile.about[0].includes('creative marketing, audience research and design technology'));
@@ -225,7 +227,6 @@ test('portfolio content distinguishes four factual case studies from two illustr
   assert(profile.skillGroups.flatMap(group => group.items).includes('Python, SQL & AI Workflows'));
   assert(profile.skillGroups.flatMap(group => group.items).includes('Arduino, C++ & Physical Computing'));
   assert(profile.skillGroups.flatMap(group => group.items).includes('Digital Fabrication & Prototyping'));
-  assert(profile.intro.some(paragraph => paragraph.includes('robotic installations')));
   assert(profile.about.some(paragraph => paragraph.includes('Arduino/C++ and digital fabrication')));
   equal(profile.note, 'A little space for curiosity — where small observations grow into playful ideas.');
   assert(profile.about.length > 0 && profile.skillGroups.every(group => group.items.length > 0));

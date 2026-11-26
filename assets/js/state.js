@@ -9,7 +9,7 @@ export function createStoryState(projects = []) {
     openProject(slug) {
       if (current.isTransitioning) return false;
       const project = projects.find(item => item.slug === slug);
-      if (!project || !Array.isArray(project.chapters) || !project.chapters.length) return false;
+      if (!project || project.locked || !Array.isArray(project.chapters) || !project.chapters.length) return false;
       return update({ ...initial(), activeProject: project });
     },
     setChapter(index) {

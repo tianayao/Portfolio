@@ -423,11 +423,12 @@ function caseStudyChapters(sample) {
 
 export const projects = samples.map(sample => ({
   slug: sample.slug,
-  title: sample.title,
-  type: sample.type,
-  summary: sample.summary,
+  title: ['slow-table', 'drift-space'].includes(sample.slug) ? 'To be unlocked' : sample.title,
+  type: ['slow-table', 'drift-space'].includes(sample.slug) ? 'A new story is on its way' : sample.type,
+  summary: ['slow-table', 'drift-space'].includes(sample.slug) ? 'A little mystery beneath the surface. Come back soon to discover more.' : sample.summary,
+  locked: ['slow-table', 'drift-space'].includes(sample.slug),
   illustrative: sample.illustrative !== false,
-  cardLabel: sample.cardLabel || 'Illustrative concept',
+  cardLabel: ['slow-table', 'drift-space'].includes(sample.slug) ? 'Coming soon' : sample.cardLabel || 'Illustrative concept',
   cardShape: sample.cardShape,
   accent: sample.accent,
   characterMedia: {
